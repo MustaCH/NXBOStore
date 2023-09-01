@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Sidebar, NavMobile } from "./components/shared/index";
+import { Cart, Chat, Checkout, FAQS, Main, ProductList } from "./screens/index";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Sidebar />
+      {/*<NavMobile />*/}
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/product-list" element={<ProductList />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/FAQS" element={<FAQS />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
