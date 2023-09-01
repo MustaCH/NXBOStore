@@ -45,7 +45,7 @@ function BannerCarousel(autoPlay) {
         <h2 className="absolute z-50 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-4xl font-bold lg:text-6xl uppercase text-gray-300">
           Welcome to the style rebellion
         </h2>
-        <div class="custom-shape-divider-top-1693587918 z-50">
+        <div className="custom-shape-divider-top-1693587918 z-50">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ function BannerCarousel(autoPlay) {
           >
             <path
               d="M1200 0L0 0 598.97 114.72 1200 0z"
-              class="shape-fill"
+              className="shape-fill"
             ></path>
           </svg>
         </div>
@@ -63,7 +63,7 @@ function BannerCarousel(autoPlay) {
           src={`${selectedImage}`}
           alt="Banner"
         />
-        <div class="custom-shape-divider-bottom-1693587976 z-50">
+        <div className="custom-shape-divider-bottom-1693587976 z-50">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ function BannerCarousel(autoPlay) {
           >
             <path
               d="M1200 0L0 0 598.97 114.72 1200 0z"
-              class="shape-fill"
+              className="shape-fill"
             ></path>
           </svg>
         </div>

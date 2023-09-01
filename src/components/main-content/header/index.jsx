@@ -1,14 +1,17 @@
 import React from "react";
 import { RiSearchLine, RiQuestionnaireLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <div className="">
       <header className="p-6 lg:py-6">
         <div className="lg:hidden w-full flex justify-end text-gray-400">
-          <button>
-            <RiQuestionnaireLine className="text-2xl md:text-3xl z-auto" />
-          </button>
+          <Link to={"/FAQS"}>
+            <button>
+              <RiQuestionnaireLine className="text-2xl md:text-3xl z-auto" />
+            </button>
+          </Link>
         </div>
         <div className="flex flex-col items-center gap-4">
           <div>
@@ -37,9 +40,11 @@ function Header() {
           </form>
         </div>
         <div className="flex justify-center mt-12">
-          <button className="bg-orange-500 hover:bg-orange-700 transition-colors duration-300 p-3 text-white font-semibold rounded-xl uppercase">
-            View all products
-          </button>
+          <Link to={"/product-list"}>
+            <button className="bg-orange-500 hover:bg-orange-700 transition-colors duration-300 p-3 text-white font-semibold rounded-xl uppercase">
+              View all products
+            </button>
+          </Link>
         </div>
       </header>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   RiHome6Line,
   RiTShirtLine,
@@ -6,9 +6,16 @@ import {
   RiShoppingCart2Line,
   RiQuestionnaireLine,
 } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const [activePage, setActivePage] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    setActivePage(location.pathname);
+  }, [location]);
+
   return (
     <nav className="hidden bg-zinc-900 fixed left-0 top-0 w-28 h-full lg:flex flex-col justify-between py-6 rounded-tr-xl rounded-br-xl">
       <div>
@@ -24,49 +31,99 @@ const Sidebar = () => {
               </svg>
             </div>
           </li>
-          <li className="bg-zinc-800 p-4 rounded-tl-xl rounded-bl-xl">
-            <Link
+          <li
+            className={` p-4 rounded-tl-xl rounded-bl-xl ${
+              activePage === "/"
+                ? "bg-zinc-800"
+                : "bg-zinc-900 hover:bg-zinc-800"
+            }`}
+          >
+            <NavLink
               to="/"
-              className="bg-orange-600 p-4 flex justify-center rounded-xl text-white"
+              className={` p-4 flex justify-center rounded-xl ${
+                activePage === "/"
+                  ? "bg-orange-600 text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+              }`}
             >
               <RiHome6Line className="text-2xl" />
-            </Link>
+            </NavLink>
           </li>
-          <li className="hover:bg-zinc-800 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
-            <Link
+          <li
+            className={` p-4 rounded-tl-xl rounded-bl-xl ${
+              activePage === "/product-list"
+                ? "bg-zinc-800"
+                : "bg-zinc-900 hover:bg-zinc-800"
+            }`}
+          >
+            <NavLink
               to="./product-list"
-              className="group-hover:bg-orange-600 p-4 flex justify-center rounded-xl text-orange-600 group-hover:text-white"
+              className={` p-4 flex justify-center rounded-xl ${
+                activePage === "/product-list"
+                  ? "bg-orange-600 text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+              }`}
             >
               <RiTShirtLine className="text-2xl" />
-            </Link>
+            </NavLink>
           </li>
-          <li className="hover:bg-zinc-800 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
-            <Link
+          <li
+            className={` p-4 rounded-tl-xl rounded-bl-xl ${
+              activePage === "/chat"
+                ? "bg-zinc-800"
+                : "bg-zinc-900 hover:bg-zinc-800"
+            }`}
+          >
+            <NavLink
               to="./chat"
-              className="group-hover:bg-orange-600 p-4 flex justify-center rounded-xl text-orange-600 group-hover:text-white"
+              className={` p-4 flex justify-center rounded-xl ${
+                activePage === "/chat"
+                  ? "bg-orange-600 text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+              }`}
             >
               <RiChat1Line className="text-2xl" />
-            </Link>
+            </NavLink>
           </li>
-          <li className="hover:bg-zinc-800 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
-            <Link
+          <li
+            className={` p-4 rounded-tl-xl rounded-bl-xl ${
+              activePage === "/cart"
+                ? "bg-zinc-800"
+                : "bg-zinc-900 hover:bg-zinc-800"
+            }`}
+          >
+            <NavLink
               to="./cart"
-              className="group-hover:bg-orange-600 p-4 flex justify-center rounded-xl text-orange-600 group-hover:text-white"
+              className={` p-4 flex justify-center rounded-xl ${
+                activePage === "/cart"
+                  ? "bg-orange-600 text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+              }`}
             >
               <RiShoppingCart2Line className="text-2xl" />
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
       <div>
         <ul className="pl-4">
-          <li className="hover:bg-zinc-800 p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
-            <Link
+          <li
+            className={` p-4 rounded-tl-xl rounded-bl-xl ${
+              activePage === "/FAQS"
+                ? "bg-zinc-800"
+                : "bg-zinc-900 hover:bg-zinc-800"
+            }`}
+          >
+            <NavLink
               to="./FAQS"
-              className="group-hover:bg-orange-600 p-4 flex justify-center rounded-xl text-orange-600 group-hover:text-white"
+              className={` p-4 flex justify-center rounded-xl ${
+                activePage === "/FAQS"
+                  ? "bg-orange-600 text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+              }`}
             >
               <RiQuestionnaireLine className="text-2xl" />
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

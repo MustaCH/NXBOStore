@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Sidebar />
-      {/*<NavMobile />*/}
+      <NavMobile />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/product-list" element={<ProductList />} />
