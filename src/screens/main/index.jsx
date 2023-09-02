@@ -9,7 +9,7 @@ import {
 
 function Main() {
   return (
-    <main className="lg:pl-28 ">
+    <main className="lg:pl-28 mb-10">
       <div className="">
         <Header />
         <BannerCarousel />
