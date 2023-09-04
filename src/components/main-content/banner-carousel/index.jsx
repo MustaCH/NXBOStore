@@ -43,7 +43,7 @@ function BannerCarousel(autoPlay) {
     <div className="pt-5 pb-8">
       <div className="h-64 w-full relative text-center inline-block">
         <h2 className="absolute z-50 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-4xl font-bold lg:text-6xl uppercase text-gray-300">
-          Welcome to the style rebellion
+          always be yourself
         </h2>
         <div className="custom-shape-divider-top-1693587918 z-50">
           <svg
