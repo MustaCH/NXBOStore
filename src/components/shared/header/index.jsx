@@ -39,13 +39,6 @@ function Header() {
             </div>
           </form>
         </div>
-        <div className="flex justify-center mt-12">
-          <Link to={"/product-list"}>
-            <button className="bg-orange-500 hover:bg-orange-700 transition-colors duration-300 p-3 text-white font-semibold rounded-xl uppercase">
-              View all products
-            </button>
-          </Link>
-        </div>
       </header>
     </div>
   );

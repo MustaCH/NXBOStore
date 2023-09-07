@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Header, BannerCarousel } from "../../components/main-content/index";
+import { BannerCarousel } from "../../components/main-content/index";
 import {
   getDiscountedProducts,
   getLastAvailable,
   getLatestReleases,
 } from "../../database/firebase";
 import Card from "../../components/shared/card";
+import { Header } from "../../components/shared";
+import { Link } from "react-router-dom";
 
 function Main() {
   const [latestReleases, setLatestReleases] = useState([]);
@@ -14,12 +16,8 @@ function Main() {
 
   useEffect(() => {
     async function fetchLatestReleases() {
-      try {
-        const latestReleasesData = await getLatestReleases();
-        setLatestReleases(latestReleasesData);
-      } catch (error) {
-        console.error("Error fetching latest releases:", error);
-      }
+      const latestReleasesData = await getLatestReleases();
+      setLatestReleases(latestReleasesData);
     }
 
     fetchLatestReleases();
@@ -27,12 +25,8 @@ function Main() {
 
   useEffect(() => {
     async function fetchLastAvailableProducts() {
-      try {
-        const lastAvailableData = await getLastAvailable();
-        setLastAvailable(lastAvailableData);
-      } catch (error) {
-        console.error("Error fetching last available products:", error);
-      }
+      const lastAvailableData = await getLastAvailable();
+      setLastAvailable(lastAvailableData);
     }
 
     fetchLastAvailableProducts();
@@ -40,12 +34,8 @@ function Main() {
 
   useEffect(() => {
     async function fetchDiscountedProducts() {
-      try {
-        const discountedProductsData = await getDiscountedProducts();
-        setDiscountedProducts(discountedProductsData);
-      } catch (error) {
-        console.error("Error fetching discounted products:", error);
-      }
+      const discountedProductsData = await getDiscountedProducts();
+      setDiscountedProducts(discountedProductsData);
     }
 
     fetchDiscountedProducts();
@@ -55,6 +45,13 @@ function Main() {
     <main className="lg:pl-28 mb-10">
       <div className="">
         <Header />
+        <div className="flex justify-center mt-4 mb-12">
+          <Link to={"/product-list"}>
+            <button className="bg-orange-500 hover:bg-orange-700 transition-colors duration-300 p-3 text-white font-semibold rounded-xl uppercase">
+              View all categories
+            </button>
+          </Link>
+        </div>
         <BannerCarousel />
         <div className="lg:col-span-6 flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-xl lg:text-2xl">Latest releases</h2>

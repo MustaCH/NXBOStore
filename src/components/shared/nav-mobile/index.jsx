@@ -16,7 +16,7 @@ function NavMobile() {
   }, [location]);
 
   return (
-    <div>
+    <div className="z-50">
       <nav className="bg-zinc-900 lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 p-4 px-10 flex justify-between rounded-tr-xl rounded-tl-xl">
         <NavLink to={"/"}>
           <button

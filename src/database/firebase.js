@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import "firebase/firestore";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   getFirestore,
   orderBy,
@@ -70,6 +72,24 @@ export async function getDiscountedProducts() {
     id: item.id,
   }));
   return products;
+}
+
+export async function getCategory(cat) {
+  const productsRef = collection(db, "products");
+  const q = query(productsRef, where("cat", "==", cat));
+  const snapshot = await getDocs(q);
+  const products = snapshot.docs.map((item) => ({
+    ...item.data(),
+    id: item.id,
+  }));
+  return products;
+}
+
+export async function getProduct(id) {
+  const productsRef = collection(db, "products");
+  const docRef = doc(productsRef, id);
+  const snapshot = await getDoc(docRef);
+  return { ...snapshot.data(), id: snapshot.id };
 }
 
 export default db;
