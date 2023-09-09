@@ -4,8 +4,7 @@ import {
   getLastAvailable,
   getLatestReleases,
 } from "../../database/firebase";
-import Card from "../../components/shared/card";
-import { Carousel, Header } from "../../components/shared";
+import { Carousel, Header, Card } from "../../components/shared";
 import { Link } from "react-router-dom";
 
 function Main() {
@@ -64,7 +63,7 @@ function Main() {
           </Link>
         </div>
         <Carousel auto={true} slides={slides} />
-        <div className="lg:col-span-6 flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
+        <div className="flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-xl lg:text-2xl">Latest releases</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {latestReleases.map((product) => (
@@ -72,7 +71,7 @@ function Main() {
             ))}
           </div>
         </div>
-        <div className="lg:col-span-6 flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
+        <div className="flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-xl lg:text-2xl">Last available</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {lastAvailable.map((product) => (
@@ -80,7 +79,7 @@ function Main() {
             ))}
           </div>
         </div>
-        <div className="lg:col-span-6 flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
+        <div className="flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-xl lg:text-2xl">Discounts %</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {discountedProducts.map((product) => (

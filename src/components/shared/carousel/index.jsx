@@ -28,7 +28,7 @@ function Carousel({ auto = true, slides }) {
     if (auto) {
       intervalId = setInterval(() => {
         autoAdvance();
-      }, 3000);
+      }, 2000);
     }
 
     return () => {
