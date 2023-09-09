@@ -42,9 +42,9 @@ function Carousel({ auto = true, slides }) {
     <div className="max-w-80 h-60 md:h-96 w-full pb-16 pt-2 relative group">
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className="flex w-full h-full bg-center bg-cover duration-500 text-center items-center justify-center"
+        className="brightness-75 flex w-full h-full bg-center bg-cover duration-500 text-center items-center justify-center"
       >
-        <p className="text-5xl md:text-8xl font-bold text-gray-300 pb-2 uppercase">
+        <p className="text-5xl md:text-8xl font-bold text-gray-100 pb-2 uppercase text-shadow-xl">
           Always be yourself
         </p>
       </div>
