@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { BannerCarousel } from "../../components/main-content/index";
 import {
   getDiscountedProducts,
   getLastAvailable,
   getLatestReleases,
 } from "../../database/firebase";
 import Card from "../../components/shared/card";
-import { Header } from "../../components/shared";
+import { Carousel, Header } from "../../components/shared";
 import { Link } from "react-router-dom";
 
 function Main() {
   const [latestReleases, setLatestReleases] = useState([]);
   const [lastAvailable, setLastAvailable] = useState([]);
   const [discountedProducts, setDiscountedProducts] = useState([]);
+
+  const slides = [
+    {
+      url: "https://acdn.mitiendanube.com/stores/969/644/themes/rio/1-slide-1693338550384-4838186764-82ff8fbb102cbdb0c9b8472f3e0977ec1693338718-1024-1024.png?1808517332",
+    },
+    {
+      url: "https://acdn.mitiendanube.com/stores/969/644/themes/rio/1-slide-1693338801164-6854836896-a76b7e09b56f14a77949cd011219e4b81693339027-1024-1024.png?1808517332",
+    },
+    {
+      url: "https://acdn.mitiendanube.com/stores/969/644/themes/rio/1-slide-1693338801164-2990332114-d443be747afa05bce3cf181b5ad3c82a1693339028-1024-1024.png?1808517332",
+    },
+  ];
 
   useEffect(() => {
     async function fetchLatestReleases() {
@@ -52,7 +63,7 @@ function Main() {
             </button>
           </Link>
         </div>
-        <BannerCarousel />
+        <Carousel auto={true} slides={slides} />
         <div className="lg:col-span-6 flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-xl lg:text-2xl">Latest releases</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
