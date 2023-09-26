@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProduct } from "../../database/firebase";
+import { getCategory, getProduct } from "../../database/firebase";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { Dropdown } from "../../components/shared/index";
+import { Card, Dropdown } from "../../components/shared/index";
 
 const sizes = ["s", "m", "l", "xl"];
 const quantity = [1, 2, 3, 4, 5];
 
 function ProductDetail() {
   const [product, setProduct] = useState("");
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   let params = useParams();
 
@@ -24,9 +25,17 @@ function ProductDetail() {
     getProduct(params.itemid)
       .then((response) => {
         setProduct(response);
+        getCategory(response.cat)
+          .then((related) => {
+            const filteredRelated = related.filter(
+              (item) => item.id !== params.itemid
+            );
+            setRelatedProducts(filteredRelated.slice(0, 3));
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
-  });
+  }, [params.itemid]);
 
   return (
     <>
@@ -65,13 +74,27 @@ function ProductDetail() {
             </div>
           </div>
 
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 flex flex-col justify-between">
             <div className="flex flex-col gap-6 uppercase text-gray-300">
               <h2 className="text-4xl lg:text-5xl font-semibold">
                 {product.title}
               </h2>
-              <p className="text-3xl">
-                $ <span className="text-orange-600">{product.price}</span>
+              <p className="text-3xl flex items-center">
+                ${" "}
+                <span className="text-orange-600">
+                  {product.discount > 0
+                    ? product.price - product.discount
+                    : product.price}
+                </span>
+                <span
+                  className={`${
+                    product.discount === 0
+                      ? "hidden"
+                      : "inline text-base text-red-600 ms-2"
+                  }`}
+                >
+                  -{product.discount}%
+                </span>
               </p>
               <div className="flex justify-between items-center mb-6">
                 <p>
@@ -81,14 +104,14 @@ function ProductDetail() {
                   See size chart
                 </button>
               </div>
-            </div>
-            <div className="flex justify-between uppercase text-gray-300 py-4">
-              <Dropdown
-                name="choose size"
-                hidden={product.size === "one size" ? true : false}
-                options={sizes}
-              />
-              <Dropdown name="quantity" options={quantity} />
+              <div className="flex justify-between uppercase text-gray-300 pb-4">
+                <Dropdown
+                  name="choose size"
+                  hidden={product.size === "one size" ? true : false}
+                  options={sizes}
+                />
+                <Dropdown name="quantity" options={quantity} />
+              </div>
             </div>
             <div className="flex flex-col">
               <button className="bg-orange-600 p-2 lg:hover:bg-orange-800 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
@@ -101,6 +124,18 @@ function ProductDetail() {
           </div>
         </div>
       </div>
+      {relatedProducts.length > 0 && (
+        <div className="lg:ps-28 bg-zinc-800 pb-24 md:px-6 lg:pt-12">
+          <h3 className="text-gray-300 text-center uppercase font-semibold text-xl mb-2">
+            Similar Products:
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {relatedProducts.map((relatedProduct) => (
+              <Card product={relatedProduct} />
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }

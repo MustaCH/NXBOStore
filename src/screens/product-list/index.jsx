@@ -56,7 +56,7 @@ function ProductList() {
           </Link>
         </li>
       </ul>
-      <div className="mb-24 lg:my-24 flex flex-col lg:grid lg:grid-cols-2 items-center uppercase text-gray-300 font-semibold text-4xl lg:text-8xl">
+      <div className="mb-24 lg:my-24 flex flex-col lg:grid lg:grid-cols-2 items-center uppercase text-gray-300 font-semibold text-4xl lg:text-8xl ">
         <Link
           to={"/cat/shirts"}
           className="my-4 lg:my-0 relative transition-all drop-shadow-xl hover:text-orange-600 group"
@@ -124,9 +124,9 @@ function ProductList() {
         </Link>
         <Link
           to={"/cat/accesories"}
-          className="my-4 lg:my-0 relative transition-all drop-shadow-xl hover:text-orange-600 group"
+          className="my-4 lg:my-0 relative transition-all drop-shadow-xl hover:text-orange-600 group "
         >
-          <p className="absolute z-40 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] group-hover:scale-105 duration-300">
+          <p className="absolute z-10 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] group-hover:scale-105 duration-300">
             accesories
           </p>
           <img
