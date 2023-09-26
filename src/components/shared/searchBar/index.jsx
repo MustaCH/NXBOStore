@@ -4,6 +4,7 @@ import { RiSearchLine } from "react-icons/ri";
 
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleFilter = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -20,6 +21,12 @@ function SearchBar({ placeholder, data }) {
     }
   };
 
+  const handleBlur = () => {
+    setTimeout(() => {
+      setFilteredData([]);
+    }, 200);
+  };
+
   return (
     <form className="relative w-full lg:w-1/2 group">
       <div className="w-full relative z-10 ">
@@ -27,6 +34,7 @@ function SearchBar({ placeholder, data }) {
         <input
           type="text"
           onChange={handleFilter}
+          onBlur={handleBlur}
           placeholder={placeholder}
           className="bg-zinc-900 w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none border-2 border-transparent focus:border-orange-500"
         />
