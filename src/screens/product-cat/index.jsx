@@ -53,10 +53,10 @@ function ProductCat() {
         {catid}
       </h2>
       <div className="flex flex-col md:flex-row justify-evenly my-12 text-white items-center">
-        <p className="font-bold text-lg">Filter by:</p>
-        <div className="flex gap-4 lg:gap-56 items-center">
+        <p className="font-bold text-lg pb-5 lg:pb-0">Filter by:</p>
+        <div className="flex gap-4 lg:gap-56 mx-5 items-center">
           <button
-            className={`uppercase text-sm  p-2 lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
               filter === "latestReleases"
                 ? "bg-orange-600 border-2 border-orange-300"
                 : "bg-orange-800"
@@ -66,9 +66,9 @@ function ProductCat() {
             latest releases
           </button>
           <button
-            className={`uppercase text-sm  p-2 lg:hover:bg-orange-600 rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 rounded-xl shadow-lg ${
               filter === "lastAvailable"
-                ? "bg-orange-600 border-2 border-orange-300"
+                ? "bg-orange-600 border-2 border-orange-300 font-semibold"
                 : "bg-orange-800"
             }`}
             onClick={() => handleFilterClick("lastAvailable")}
@@ -76,7 +76,7 @@ function ProductCat() {
             last available
           </button>
           <button
-            className={`uppercase text-sm  p-2 lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
               filter === "discount"
                 ? "bg-orange-600 border-2 border-orange-300"
                 : "bg-orange-800"
@@ -85,15 +85,17 @@ function ProductCat() {
           >
             discounts %
           </button>
-          <button
-            className={`${filter === "" ? "hidden" : "text-rose-600 text-3xl"}`}
-            onClick={clearFilter}
-          >
-            <RiCloseFill />
-          </button>
         </div>
+        <button
+          className={`${
+            filter === "" ? "hidden" : "text-rose-600 text-3xl pt-5 lg:pt-0"
+          }`}
+          onClick={clearFilter}
+        >
+          <RiCloseFill />
+        </button>
       </div>
-      <div className="flex flex-col items-center md:flex-row md:flex-wrap justify-center gap-4">
+      <div className="flex flex-col items-center md:flex-row md:flex-wrap justify-center mb-28 lg:mb-0 gap-4">
         {filteredCategory.length === 0 ? (
           <div className="flex flex-col items-center text-white py-12  font-bold">
             <p className="text-2xl pb-4">No products available</p>

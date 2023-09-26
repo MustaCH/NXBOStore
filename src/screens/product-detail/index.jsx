@@ -131,7 +131,7 @@ function ProductDetail() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {relatedProducts.map((relatedProduct) => (
-              <Card product={relatedProduct} />
+              <Card key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
         </div>

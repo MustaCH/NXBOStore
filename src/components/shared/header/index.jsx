@@ -1,10 +1,27 @@
-import React from "react";
-import { RiSearchLine, RiQuestionnaireLine } from "react-icons/ri";
+import React, { useEffect, useState } from "react";
+import { RiQuestionnaireLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import SearchBar from "../searchBar";
+import { getProducts } from "../../../database/firebase";
 
 function Header() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsData = await getProducts();
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="">
+    <div>
       <header className="p-6 lg:py-6">
         <div className="lg:hidden w-full flex justify-end text-gray-400">
           <Link to={"/FAQS"}>
@@ -28,16 +45,7 @@ function Header() {
               </svg>
             </div>
           </div>
-          <form className="w-full lg:w-1/2" action="">
-            <div className="w-full relative z-10">
-              <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 text-orange-600" />
-              <input
-                type="text"
-                placeholder="Search"
-                className="bg-zinc-900 w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
-              />
-            </div>
-          </form>
+          <SearchBar placeholder={"Search"} data={products} />
         </div>
       </header>
     </div>

@@ -56,6 +56,7 @@ function ProductList() {
           </Link>
         </li>
       </ul>
+
       <div className="mb-24 lg:my-24 flex flex-col lg:grid lg:grid-cols-2 items-center uppercase text-gray-300 font-semibold text-4xl lg:text-8xl ">
         <Link
           to={"/cat/shirts"}
