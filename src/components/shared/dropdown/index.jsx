@@ -16,7 +16,7 @@ function Dropdown({ name, options, hidden }) {
       className={`${
         hidden === true
           ? "hidden"
-          : "relative flex justify-between w-1/2 mx-1 rounded-lg bg-zinc-800 px-2 py-2 hover:bg-zinc-700 text-gray-300 uppercase border-4 border-transparent active:border-orange-600 active:text-orange-600 cursor-pointer"
+          : "relative flex justify-between w-1/2 mx-1 rounded-lg bg-zinc-800 px-2 py-2 hover:bg-zinc-700 text-gray-300 uppercase cursor-pointer"
       }`}
     >
       <p>{selectedOption || name}</p>
@@ -25,7 +25,7 @@ function Dropdown({ name, options, hidden }) {
         <div className="absolute bg-zinc-800 top-12 left-0 flex flex-col rounded-lg p-2 w-full cursor-pointer">
           {options.map((item, i) => (
             <div
-              className="hover:bg-orange-600 hover:text-black hover:font-semibold w-full rounded-lg p-2 text-center cursor-pointer"
+              className="hover:bg-orange-600 hover:text-black hover:font-semibold duration-150 w-full rounded-lg p-2 text-center cursor-pointer"
               key={i}
               onClick={() => handleOptionClick(item)}
             >

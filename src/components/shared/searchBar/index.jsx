@@ -4,7 +4,6 @@ import { RiSearchLine } from "react-icons/ri";
 
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleFilter = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -44,7 +43,7 @@ function SearchBar({ placeholder, data }) {
           {filteredData.map((value, key) => {
             return (
               <Link
-                to={`./cat/product-list/${value.id}`}
+                to={`/cat/:catid/${value.id}`}
                 key={key}
                 className="flex items-center gap-4 text-white p-2 my-1 bg-zinc-900 border-2 border-transparent rounded-lg hover:border-orange-500 hover:scale-[102%] duration-150"
               >

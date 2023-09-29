@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategory } from "../../database/firebase";
 import { RiCloseFill, RiEmotionUnhappyLine } from "react-icons/ri";
-import { Card } from "../../components/shared";
+import { Card, Header } from "../../components/shared";
 
 function ProductCat() {
   const { catid } = useParams();
@@ -49,6 +49,7 @@ function ProductCat() {
 
   return (
     <div className="lg:ps-28 lg:py-14">
+      <Header />
       <h2 className="font-bold text-white text-5xl lg:text-6xl uppercase text-center border-b-2 border-b-orange-600 py-6 lg:pb-6">
         {catid}
       </h2>

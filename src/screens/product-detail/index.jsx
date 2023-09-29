@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategory, getProduct } from "../../database/firebase";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { Card, Dropdown } from "../../components/shared/index";
+import { Card, Dropdown, Header } from "../../components/shared/index";
 
 const sizes = ["s", "m", "l", "xl"];
 const quantity = [1, 2, 3, 4, 5];
@@ -39,6 +39,7 @@ function ProductDetail() {
 
   return (
     <>
+      <Header />
       <div className="lg:ps-28 flex justify-center pt-6 pb-24 md:py-12 px-1 md:px-0">
         <div className="flex flex-col md:flex-row justify-between p-6 lg:p-8 bg-zinc-900 w-full lg:w-1/2 rounded-xl">
           <div className="md:me-6 relative flex align-center">
@@ -100,7 +101,7 @@ function ProductDetail() {
                 <p>
                   Size: <span className="text-orange-600">{product.size}</span>
                 </p>
-                <button className="bg-zinc-800 p-1 lg:hover:bg-orange-800 rounded-xl uppercase text-gray-200 text-xs md:text-sm w-2/5 shadow-xl">
+                <button className="bg-zinc-800 p-1 lg:hover:bg-orange-800 duration-150 rounded-xl uppercase text-gray-200 text-xs md:text-sm w-2/5 shadow-xl">
                   See size chart
                 </button>
               </div>
@@ -114,10 +115,10 @@ function ProductDetail() {
               </div>
             </div>
             <div className="flex flex-col">
-              <button className="bg-orange-600 p-2 lg:hover:bg-orange-800 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
+              <button className="bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
                 Buy
               </button>
-              <button className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
+              <button className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
                 Add to cart
               </button>
             </div>
@@ -125,8 +126,8 @@ function ProductDetail() {
         </div>
       </div>
       {relatedProducts.length > 0 && (
-        <div className="lg:ps-28 bg-zinc-800 pb-24 md:px-6 lg:pt-12">
-          <h3 className="text-gray-300 text-center uppercase font-semibold text-xl mb-2">
+        <div className="lg:ps-28 bg-zinc-800 pb-24 md:px-6 lg:pt-12 border-t-2 border-orange-500">
+          <h3 className="text-gray-300 text-center uppercase font-semibold text-2xl mb-2 ">
             Similar Products:
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

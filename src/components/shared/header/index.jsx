@@ -47,6 +47,56 @@ function Header() {
           </div>
           <SearchBar placeholder={"Search"} data={products} />
         </div>
+        <ul className="hidden lg:flex lg:justify-between lg:mx-80 border-b-2 py-4 mt-8 border-orange-600 uppercase text-orange-600 font-semibold">
+          <li>
+            <Link
+              to={"/cat/shirts"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Shirts
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/cat/hoodies"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Hoodies
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/cat/coats"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Coats
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/cat/pants"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Pants
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/cat/shorts"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Shorts
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/cat/accesories"}
+              className="transition-all hover:text-gray-300 duration-300"
+            >
+              Accesories
+            </Link>
+          </li>
+        </ul>
       </header>
     </div>
   );

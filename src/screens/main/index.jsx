@@ -5,7 +5,6 @@ import {
   getLatestReleases,
 } from "../../database/firebase";
 import { Carousel, Header, Card } from "../../components/shared";
-import { Link } from "react-router-dom";
 
 function Main() {
   const [latestReleases, setLatestReleases] = useState([]);
@@ -55,13 +54,6 @@ function Main() {
     <main className="lg:pl-28 mb-10">
       <div className="">
         <Header />
-        <div className="flex justify-center mt-4 mb-12">
-          <Link to={"/product-list"}>
-            <button className="bg-orange-500 hover:bg-orange-700 transition-colors duration-300 p-3 text-white font-semibold rounded-xl uppercase">
-              View all categories
-            </button>
-          </Link>
-        </div>
         <Carousel auto={true} slides={slides} />
         <div className="flex flex-col items-center text-center text-gray-300 uppercase font-semibold pb-12">
           <h2 className="text-3xl text-orange-500">Latest releases</h2>
