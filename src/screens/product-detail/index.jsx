@@ -38,9 +38,9 @@ function ProductDetail() {
   }, [params.itemid]);
 
   return (
-    <>
+    <div className="lg:ps-28">
       <Header />
-      <div className="lg:ps-28 flex justify-center pt-6 pb-24 md:py-12 px-1 md:px-0">
+      <div className=" flex justify-center pt-6 pb-24 md:py-12 px-1 md:px-0">
         <div className="flex flex-col md:flex-row justify-between p-6 lg:p-8 bg-zinc-900 w-full lg:w-1/2 rounded-xl">
           <div className="md:me-6 relative flex align-center">
             <img
@@ -80,23 +80,46 @@ function ProductDetail() {
               <h2 className="text-4xl lg:text-5xl font-semibold">
                 {product.title}
               </h2>
-              <p className="text-3xl flex items-center">
-                ${" "}
-                <span className="text-orange-600">
-                  {product.discount > 0
-                    ? product.price - product.discount
-                    : product.price}
-                </span>
-                <span
+              <div className="flex items-center gap-3">
+                <p
                   className={`${
-                    product.discount === 0
-                      ? "hidden"
-                      : "inline text-base text-red-600 ms-2"
+                    product.stock === 0
+                      ? "text-3xl flex items-center text-gray-300/50 line-through"
+                      : "text-3xl flex items-center"
                   }`}
                 >
-                  -{product.discount}%
+                  $
+                  <span
+                    className={`${
+                      product.stock === 0
+                        ? "text-gray-300/50"
+                        : "text-orange-600 ps-1"
+                    }`}
+                  >
+                    {product.discount > 0
+                      ? product.price - product.discount
+                      : product.price}
+                  </span>
+                  <span
+                    className={`${
+                      product.discount === 0 || product.stock === 0
+                        ? "hidden"
+                        : "inline text-base text-red-600 ms-2"
+                    }`}
+                  >
+                    -{product.discount}%
+                  </span>
+                </p>
+                <span
+                  className={`${
+                    product.stock === 0
+                      ? "inline text-xl text-gray-300"
+                      : "hidden"
+                  }`}
+                >
+                  SOLD OUT
                 </span>
-              </p>
+              </div>
               <div className="flex justify-between items-center mb-6">
                 <p>
                   Size: <span className="text-orange-600">{product.size}</span>
@@ -126,8 +149,8 @@ function ProductDetail() {
         </div>
       </div>
       {relatedProducts.length > 0 && (
-        <div className="lg:ps-28 bg-zinc-800 pb-24 md:px-6 lg:pt-12 border-t-2 border-orange-500">
-          <h3 className="text-gray-300 text-center uppercase font-semibold text-2xl mb-2 ">
+        <div className=" bg-zinc-800 pb-24 md:px-6 lg:pt-12 border-t-2 border-orange-500">
+          <h3 className="text-gray-300 text-center uppercase font-semibold text-2xl mb-2 mt-2">
             Similar Products:
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -137,7 +160,7 @@ function ProductDetail() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
