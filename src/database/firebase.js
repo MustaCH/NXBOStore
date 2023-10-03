@@ -56,7 +56,7 @@ export async function getLatestReleases() {
 
 export async function getLastAvailable() {
   const productsRef = collection(db, "products");
-  const q = query(productsRef, where("stock", "<", 10));
+  const q = query(productsRef, where("stock", "<", 10, "||", ">", 0));
   const snapshot = await getDocs(q);
   const products = snapshot.docs.map((item) => ({
     ...item.data(),

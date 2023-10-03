@@ -27,7 +27,7 @@ function ProductCat() {
       });
       setFilteredCategory(latestReleases);
     } else if (filter === "lastAvailable") {
-      const lastAvailable = category.filter((product) => product.stock < 10);
+      const lastAvailable = category.filter((product) => product.stock <= 10);
       setFilteredCategory(lastAvailable);
     } else if (filter === "discount") {
       const discountedProducts = category.filter(

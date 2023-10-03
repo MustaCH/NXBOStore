@@ -41,7 +41,7 @@ const Sidebar = () => {
               className={` p-4 flex justify-center rounded-xl ${
                 activePage === "/"
                   ? "bg-orange-600 text-white"
-                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiHome6Line className="text-2xl" />
@@ -57,7 +57,7 @@ const Sidebar = () => {
               className={` p-4 flex justify-center rounded-xl ${
                 activePage === "/product-list"
                   ? "bg-orange-600 text-white"
-                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiTShirtLine className="text-2xl" />
@@ -73,7 +73,7 @@ const Sidebar = () => {
               className={` p-4 flex justify-center rounded-xl ${
                 activePage === "/chat"
                   ? "bg-orange-600 text-white"
-                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiChat1Line className="text-2xl" />
@@ -89,7 +89,7 @@ const Sidebar = () => {
               className={` p-4 flex justify-center rounded-xl ${
                 activePage === "/cart"
                   ? "bg-orange-600 text-white"
-                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiShoppingCart2Line className="text-2xl" />
@@ -109,7 +109,7 @@ const Sidebar = () => {
               className={` p-4 flex justify-center rounded-xl ${
                 activePage === "/FAQS"
                   ? "bg-orange-600 text-white"
-                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white"
+                  : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiQuestionnaireLine className="text-2xl" />
