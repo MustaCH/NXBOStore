@@ -19,7 +19,7 @@ function Card({ product }) {
       <div className="bg-zinc-900 w-64 lg:w-96 mt-16 p-8 pb-3 rounded-xl flex flex-col items-center text-center text-gray-300 uppercase font-semibold">
         <div>
           <img
-            className="w-40 h-40 lg:w-60 lg:h-60 object-cover rounded-full -mt-16 border group-hover:border-4 group-hover:border-orange-600 transition duration-200"
+            className="w-40 h-40 lg:w-60 lg:h-60 object-cover rounded-full -mt-16 border border-transparent group-hover:border-4 group-hover:border-orange-600 duration-150"
             src={pic1}
             alt={title}
           />
