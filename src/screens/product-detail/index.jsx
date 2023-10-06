@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getCategory, getProduct } from "../../database/firebase";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Card, Dropdown, Header } from "../../components/shared/index";
@@ -163,12 +163,13 @@ function ProductDetail() {
               </div>
             </div>
             <div className="flex flex-col">
-              <button
+              <Link
+                to={"/cart"}
                 onClick={handleAddToCart}
-                className="bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
+                className="text-center bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
               >
                 Buy
-              </button>
+              </Link>
               <button
                 onClick={handleAddToCart}
                 className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"

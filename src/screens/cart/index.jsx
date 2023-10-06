@@ -5,12 +5,16 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../storage/cart-context";
 
 function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
 
   const totalPrice = cart.reduce((total, product) => {
     const productPrice = (product.price - product.discount) * product.quantity;
     return total + productPrice;
   }, 0);
+
+  const handleClearCart = () => {
+    clearCart();
+  };
 
   return (
     <div className="lg:pl-28 lg:flex lg:justify-center fixed lg:static bg-zinc-900 lg:bg-zinc-800 w-full h-full z-50">
@@ -37,7 +41,10 @@ function Cart() {
             <button className="bg-orange-500 text-zinc-900 font-semibold p-3 rounded-xl">
               Buy
             </button>
-            <button className="bg-zinc-900  text-gray-300 font-semibold p-3 rounded-xl">
+            <button
+              onClick={handleClearCart}
+              className="bg-zinc-900  text-gray-300 font-semibold p-3 rounded-xl"
+            >
               Clear Cart
             </button>
           </div>

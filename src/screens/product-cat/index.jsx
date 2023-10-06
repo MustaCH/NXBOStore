@@ -104,7 +104,7 @@ function ProductCat() {
           </div>
         ) : (
           filteredCategory.map((product) => (
-            <Card key={product.id} product={product} />
+            <Card key={product.id} product={product} btnText={"See more"} />
           ))
         )}
       </div>
