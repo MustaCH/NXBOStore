@@ -57,8 +57,8 @@ function NavMobile() {
             <span
               className={`${
                 cart.length === 0
-                  ? `hidden`
-                  : `absolute top-5 right-7 text-lg text-orange-600 text-center rounded-full`
+                  ? `absolute opacity-0`
+                  : `absolute opacity-100 transition-opacity duration-500 text-gray-400 font-semibold text-center rounded-full  top-5 right-7 text-lg`
               }`}
             >
               {cart.length}

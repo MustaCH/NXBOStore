@@ -98,8 +98,8 @@ const Sidebar = () => {
               <span
                 className={`${
                   cart.length === 0
-                    ? `hidden`
-                    : `absolute right-1 text-white text-center rounded-full px-1`
+                    ? `absolute opacity-0`
+                    : `absolute opacity-100 transition-opacity duration-500 right-2 text-white text-center rounded-full`
                 }`}
               >
                 {cart.length}

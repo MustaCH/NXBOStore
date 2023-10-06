@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import CartItem from "../../components/shared/cart-item";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../storage/cart-context";
 
 function Cart() {
   const { cart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const totalPrice = cart.reduce((total, product) => {
     const productPrice = (product.price - product.discount) * product.quantity;
@@ -19,7 +20,10 @@ function Cart() {
   return (
     <div className="lg:pl-28 lg:flex lg:justify-center fixed lg:static bg-zinc-900 lg:bg-zinc-800 w-full h-full z-50">
       <div className="bg-zinc-900 lg:w-6/12 lg:mt-12 rounded-xl">
-        <Link to={"/"} className="relative flex justify-end">
+        <Link
+          onClick={() => navigate(-1)}
+          className="relative flex justify-end"
+        >
           <RiArrowLeftSLine className="lg:hidden absolute left-4 top-4 p-2 box-content text-gray-300 bg-zinc-800 rounded-full text-xl" />
           <h1 className="text-gray-300 font-bold text-3xl p-4">Cart</h1>
         </Link>
