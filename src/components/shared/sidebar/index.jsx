@@ -95,7 +95,13 @@ const Sidebar = () => {
               }`}
             >
               <RiShoppingCart2Line className="text-2xl" />
-              <span className="absolute right-1 text-white text-center rounded-full px-1">
+              <span
+                className={`${
+                  cart.length === 0
+                    ? `hidden`
+                    : `absolute right-1 text-white text-center rounded-full px-1`
+                }`}
+              >
                 {cart.length}
               </span>
             </NavLink>

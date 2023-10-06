@@ -54,7 +54,13 @@ function NavMobile() {
             }
           >
             <RiShoppingCart2Line />
-            <span className="absolute top-5 right-7 text-lg text-orange-600 text-center rounded-full">
+            <span
+              className={`${
+                cart.length === 0
+                  ? `hidden`
+                  : `absolute top-5 right-7 text-lg text-orange-600 text-center rounded-full`
+              }`}
+            >
               {cart.length}
             </span>
           </button>

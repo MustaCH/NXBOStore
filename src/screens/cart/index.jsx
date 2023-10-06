@@ -10,7 +10,7 @@ function Cart() {
   const totalPrice = cart.reduce((total, product) => {
     const productPrice = (product.price - product.discount) * product.quantity;
     return total + productPrice;
-  }, "--");
+  }, 0);
 
   return (
     <div className="lg:pl-28 lg:flex lg:justify-center fixed lg:static bg-zinc-900 lg:bg-zinc-800 w-full h-full z-50">
