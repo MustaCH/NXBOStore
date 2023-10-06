@@ -15,6 +15,7 @@ function ProductDetail() {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [sizePopUp, setSizePopUp] = useState(false);
   const cartContext = useContext(CartContext);
   let params = useParams();
 
@@ -41,6 +42,21 @@ function ProductDetail() {
       })
       .catch((error) => console.log(error));
   }, [params.itemid]);
+
+  const isSizeValid = product.size === "one size" || selectedOption !== "";
+
+  const chooseSize = () => {
+    setSizePopUp(true);
+  };
+
+  useEffect(() => {
+    if (sizePopUp) {
+      const timer = setTimeout(() => {
+        setSizePopUp(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [sizePopUp]);
 
   const handleAddToCart = () => {
     const selectedProduct = {
@@ -75,7 +91,7 @@ function ProductDetail() {
             : `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-0 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg`
         }`}
       >
-        <p>Added to cart</p>
+        <p>{`${isSizeValid ? `Added to cart` : `Choose a size`}`}</p>
       </div>
       <Header />
       <div className=" flex justify-center pt-6 pb-24 md:py-12 px-1 md:px-0">
@@ -160,13 +176,13 @@ function ProductDetail() {
               </div>
               <div className="flex justify-between items-center mb-6">
                 <p>
-                  Size: <span className="text-orange-600">{product.size}</span>
+                  Sizes: <span className="text-orange-600">{product.size}</span>
                 </p>
                 <button className="bg-zinc-800 p-1 lg:hover:bg-orange-800 duration-150 rounded-xl uppercase text-gray-200 text-xs md:text-sm w-2/5 shadow-xl">
                   See size chart
                 </button>
               </div>
-              <div className="flex justify-between uppercase text-gray-300 pb-4">
+              <div className="relative flex justify-between uppercase text-gray-300 pb-4">
                 <Dropdown
                   name="choose size"
                   hidden={product.size === "one size" ? true : false}
@@ -180,18 +196,27 @@ function ProductDetail() {
                   selectedOption={selectedQuantity}
                   setSelectedOption={setSelectedQuantity}
                 />
+                <div
+                  className={`${
+                    sizePopUp === false
+                      ? `hidden`
+                      : `absolute bottom-16 left-6 duration-500 text-red-500 font-semibold w-fit px-1 py-1 rounded-lg`
+                  }`}
+                >
+                  <p>select a size</p>
+                </div>
               </div>
             </div>
             <div className="flex flex-col">
               <Link
-                to={"/cart"}
-                onClick={handleAddToCart}
+                to={`${isSizeValid ? `/cart` : `/cat/:catid/${product.id}`}`}
+                onClick={isSizeValid ? handleAddToCart : chooseSize}
                 className="text-center bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
               >
                 Buy
               </Link>
               <button
-                onClick={handleAddToCart}
+                onClick={isSizeValid ? handleAddToCart : chooseSize}
                 className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
               >
                 Add to cart
