@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategory } from "../../database/firebase";
-import { RiCloseFill, RiEmotionUnhappyLine } from "react-icons/ri";
 import { Card, Header } from "../../components/shared";
 
 function ProductCat() {
@@ -92,15 +91,12 @@ function ProductCat() {
             filter === "" ? "hidden" : "text-rose-600 text-3xl pt-5 lg:pt-0"
           }`}
           onClick={clearFilter}
-        >
-          <RiCloseFill />
-        </button>
+        ></button>
       </div>
       <div className="flex flex-col items-center md:flex-row md:flex-wrap justify-center mb-28 lg:mb-0 gap-4">
         {filteredCategory.length === 0 ? (
           <div className="flex flex-col items-center text-white py-12  font-bold">
             <p className="text-2xl pb-4">No products available</p>
-            <RiEmotionUnhappyLine className="text-6xl" />
           </div>
         ) : (
           filteredCategory.map((product) => (
