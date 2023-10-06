@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategory, getProduct } from "../../database/firebase";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Card, Dropdown, Header } from "../../components/shared/index";
+import { CartContext } from "../../storage/cart-context";
 
 const sizes = ["s", "m", "l", "xl"];
 const quantity = [1, 2, 3, 4, 5];
 
 function ProductDetail() {
   const [product, setProduct] = useState("");
+  const [selectedOption, setSelectedOption] = useState(""); // Estado para el tamaño seleccionado
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   let params = useParams();
@@ -36,6 +39,21 @@ function ProductDetail() {
       })
       .catch((error) => console.log(error));
   }, [params.itemid]);
+
+  const cartContext = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    const selectedProduct = {
+      id: product.id,
+      name: product.title,
+      price: product.price,
+
+      size: selectedOption,
+      quantity: selectedQuantity,
+    };
+    cartContext.addToCart(selectedProduct);
+    console.log("Estado actual del carrito:", cartContext.cart);
+  };
 
   return (
     <div className="lg:ps-28">
@@ -133,15 +151,28 @@ function ProductDetail() {
                   name="choose size"
                   hidden={product.size === "one size" ? true : false}
                   options={sizes}
+                  selectedOption={selectedOption}
+                  setSelectedOption={setSelectedOption}
                 />
-                <Dropdown name="quantity" options={quantity} />
+                <Dropdown
+                  name="quantity"
+                  options={quantity}
+                  selectedOption={selectedQuantity}
+                  setSelectedOption={setSelectedQuantity}
+                />
               </div>
             </div>
             <div className="flex flex-col">
-              <button className="bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
+              <button
+                onClick={handleAddToCart}
+                className="bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
+              >
                 Buy
               </button>
-              <button className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl">
+              <button
+                onClick={handleAddToCart}
+                className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
+              >
                 Add to cart
               </button>
             </div>

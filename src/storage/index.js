@@ -1,1 +1,1 @@
-export { default as LocationProvider } from "./location-context";
+export { default as CartProvider } from "./cart-context";

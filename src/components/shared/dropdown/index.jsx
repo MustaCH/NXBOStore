@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
-function Dropdown({ name, options, hidden }) {
+function Dropdown({
+  name,
+  options,
+  hidden,
+  selectedOption,
+  setSelectedOption,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);

@@ -59,7 +59,7 @@ function Main() {
           <h2 className="text-3xl text-orange-500">Latest releases</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {latestReleases.map((product) => (
-              <Card key={product.id} product={product} />
+              <Card key={product.id} product={product} btnText={"See more"} />
             ))}
           </div>
         </div>
@@ -67,7 +67,7 @@ function Main() {
           <h2 className="text-3xl text-orange-500">Last available</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {lastAvailable.map((product) => (
-              <Card key={product.id} product={product} />
+              <Card key={product.id} product={product} btnText={"See more"} />
             ))}
           </div>
         </div>
@@ -75,7 +75,7 @@ function Main() {
           <h2 className="text-3xl text-orange-500">Discounts %</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4">
             {discountedProducts.map((product) => (
-              <Card key={product.id} product={product} />
+              <Card key={product.id} product={product} btnText={"See more"} />
             ))}
           </div>
         </div>

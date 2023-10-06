@@ -15,8 +15,8 @@ import CartProvider from "./storage/cart-context";
 
 function App() {
   return (
-    <BrowserRouter>
-      <CartProvider>
+    <CartProvider>
+      <BrowserRouter>
         <Sidebar />
         <NavMobile />
         <Routes>
@@ -29,8 +29,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/FAQS" element={<FAQS />} />
         </Routes>
-      </CartProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

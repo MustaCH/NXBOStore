@@ -52,7 +52,7 @@ function SearchBar({ placeholder, data }) {
                   src={value.pic1}
                   alt={value.title}
                 />
-                {value.title}{" "}
+                {value.title}
                 <span className="text-gray-300/50 text-xs">{value.cat}</span>
               </Link>
             );
