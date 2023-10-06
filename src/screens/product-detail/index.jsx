@@ -14,6 +14,7 @@ function ProductDetail() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isPopupVisible, setPopupVisible] = useState(false);
   const cartContext = useContext(CartContext);
   let params = useParams();
 
@@ -52,11 +53,30 @@ function ProductDetail() {
       quantity: selectedQuantity,
     };
     cartContext.addToCart(selectedProduct);
+    setPopupVisible(true);
     console.log("Estado actual del carrito:", cartContext.cart);
   };
 
+  useEffect(() => {
+    if (isPopupVisible) {
+      const timer = setTimeout(() => {
+        setPopupVisible(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isPopupVisible]);
+
   return (
     <div className="lg:ps-28">
+      <div
+        className={`${
+          isPopupVisible
+            ? `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-100 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg`
+            : `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-0 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg`
+        }`}
+      >
+        <p>Added to cart</p>
+      </div>
       <Header />
       <div className=" flex justify-center pt-6 pb-24 md:py-12 px-1 md:px-0">
         <div className="flex flex-col md:flex-row justify-between p-6 lg:p-8 bg-zinc-900 w-full lg:w-1/2 rounded-xl">
@@ -187,7 +207,11 @@ function ProductDetail() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {relatedProducts.map((relatedProduct) => (
-              <Card key={relatedProduct.id} product={relatedProduct} />
+              <Card
+                key={relatedProduct.id}
+                product={relatedProduct}
+                btnText={"See more"}
+              />
             ))}
           </div>
         </div>
