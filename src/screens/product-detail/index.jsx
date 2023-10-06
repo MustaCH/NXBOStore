@@ -44,9 +44,10 @@ function ProductDetail() {
   const handleAddToCart = () => {
     const selectedProduct = {
       id: product.id,
-      name: product.title,
+      title: product.title,
       price: product.price,
-
+      pic1: product.pic1,
+      discount: product.discount,
       size: selectedOption,
       quantity: selectedQuantity,
     };
