@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   RiHome6Line,
   RiTShirtLine,
@@ -7,8 +7,10 @@ import {
   RiQuestionnaireLine,
 } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
+import { CartContext } from "../../../storage/cart-context";
 
 const Sidebar = () => {
+  const { cart } = useContext(CartContext);
   const [activePage, setActivePage] = useState("");
   const location = useLocation();
 
@@ -86,13 +88,16 @@ const Sidebar = () => {
           >
             <NavLink
               to="./cart"
-              className={` p-4 flex justify-center rounded-xl ${
+              className={`relative p-4 flex justify-center rounded-xl ${
                 activePage === "/cart"
                   ? "bg-orange-600 text-white"
                   : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}
             >
               <RiShoppingCart2Line className="text-2xl" />
+              <span className="absolute right-1 text-white text-center rounded-full px-1">
+                {cart.length}
+              </span>
             </NavLink>
           </li>
         </ul>

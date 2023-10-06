@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   RiHome6Line,
   RiTShirtLine,
@@ -6,8 +6,10 @@ import {
   RiShoppingCart2Line,
 } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
+import { CartContext } from "../../../storage/cart-context";
 
 function NavMobile() {
+  const { cart } = useContext(CartContext);
   const [activePage, setActivePage] = useState("");
   const location = useLocation();
 
@@ -52,6 +54,9 @@ function NavMobile() {
             }
           >
             <RiShoppingCart2Line />
+            <span className="absolute top-5 right-7 text-lg text-orange-600 text-center rounded-full">
+              {cart.length}
+            </span>
           </button>
         </NavLink>
       </nav>

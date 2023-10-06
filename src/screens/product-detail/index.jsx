@@ -14,6 +14,7 @@ function ProductDetail() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const cartContext = useContext(CartContext);
   let params = useParams();
 
   const nextSlide = () => {
@@ -39,8 +40,6 @@ function ProductDetail() {
       })
       .catch((error) => console.log(error));
   }, [params.itemid]);
-
-  const cartContext = useContext(CartContext);
 
   const handleAddToCart = () => {
     const selectedProduct = {
