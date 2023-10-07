@@ -6,3 +6,4 @@ export { default as Sidebar } from "./sidebar/index";
 export { default as Dropdown } from "./dropdown/index";
 export { default as SearchBar } from "./searchBar/index";
 export { default as Input } from "./input/index";
+export { default as CartItem } from "./cart-item/index";
