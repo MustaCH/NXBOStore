@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCategory, getProduct } from "../../database/firebase";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Card, Dropdown, Header } from "../../components/shared/index";
@@ -17,6 +17,7 @@ function ProductDetail() {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [sizePopUp, setSizePopUp] = useState(false);
   const cartContext = useContext(CartContext);
+  const navigate = useNavigate();
   let params = useParams();
 
   const nextSlide = () => {
@@ -84,11 +85,17 @@ function ProductDetail() {
 
   return (
     <div className="lg:ps-28">
+      <Link
+        onClick={() => navigate(-1)}
+        className="relative flex justify-end z-50"
+      >
+        <RiArrowLeftSLine className="absolute left-4 top-4 p-2 box-content text-gray-300 bg-zinc-900 rounded-full text-xl hover:scale-110 duration-150 " />
+      </Link>
       <div
         className={`${
           isPopupVisible
-            ? `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-100 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg`
-            : `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-0 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg`
+            ? `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-100 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg curso pointer-events-none`
+            : `fixed top-5 lg:top-10 lg:right-5 z-50 opacity-0 transition-opacity duration-500 bg-orange-600 text-white font-semibold w-fit px-2 py-2 rounded-tr-lg rounded-br-lg lg:rounded-lg curso pointer-events-none`
         }`}
       >
         <p>{`${isSizeValid ? `Added to cart` : `Choose a size`}`}</p>

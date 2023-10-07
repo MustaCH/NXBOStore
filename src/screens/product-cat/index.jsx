@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCategory } from "../../database/firebase";
-import { RiCloseFill, RiEmotionUnhappyLine } from "react-icons/ri";
+import {
+  RiArrowLeftSLine,
+  RiCloseFill,
+  RiEmotionUnhappyLine,
+} from "react-icons/ri";
 import { Card, Header } from "../../components/shared";
 
 function ProductCat() {
@@ -9,6 +13,7 @@ function ProductCat() {
   const [category, setCategory] = useState([]);
   const [filteredCategory, setFilteredCategory] = useState([]);
   const [filter, setFilter] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -49,6 +54,9 @@ function ProductCat() {
 
   return (
     <div className="lg:ps-28 lg:pb-14">
+      <Link onClick={() => navigate(-1)} className="relative flex justify-end">
+        <RiArrowLeftSLine className="absolute left-4 top-4 p-2 box-content text-gray-300 bg-zinc-900 rounded-full text-xl hover:scale-110 duration-150" />
+      </Link>
       <Header />
       <h2 className="font-bold text-white text-5xl lg:text-6xl uppercase text-center border-b-2 border-b-orange-600 py-6 lg:pb-6">
         {catid}
