@@ -21,23 +21,29 @@ function CartItem({ product }) {
   };
 
   return (
-    <div className="grid grid-cols-9 text-gray-300 bg-zinc-800 p-4 mb-4 rounded-xl md:w-4/5">
-      <div className="col-span-6 flex items-center">
+    <div className="flex justify-between text-gray-300 bg-zinc-800 p-4 mb-4 rounded-xl w-96 md:w-4/5">
+      <div className="flex items-center">
         <Link to={`/cat/:catid/${id}`}>
-          <img className="w-16 h-16 rounded-full" src={pic1} alt={title} />
+          <img
+            className="w-12 h-12 lg:w-20 lg:h-20 rounded-full"
+            src={pic1}
+            alt={title}
+          />
         </Link>
         <div className="ps-4">
-          <p>{title}</p>
-          <p>U$D {finalPrice}</p>
+          <p className="text-xs lg:text-base">{title}</p>
+          <p className="text-sm lg:text-base">U$D {finalPrice}</p>
         </div>
       </div>
-      <div className="col-span-3 grid grid-cols-3 gap-6">
-        <div className="col-span-2 flex items-center gap-4">
-          <p className="bg-zinc-500 p-2 rounded-lg">{quantity}</p>
-          <p>{size === "" ? "One size" : size.toUpperCase()}</p>
-          <p>U$D {totalPrice}</p>
-        </div>
-        <div className="col-span-1 flex items-center">
+      <div className="flex items-center">
+        <div className="flex items-center gap-4">
+          <p className="bg-zinc-500 p-2 rounded-full px-4 py-3 text-sm">
+            {quantity}
+          </p>
+          <p className="text-xs lg:text-base">
+            {size === "" ? "One size" : `Size: ${size.toUpperCase()}`}
+          </p>
+          <p className="text-sm lg:text-base">U$D {totalPrice}</p>
           <button>
             <RiDeleteBin5Line
               onClick={handleDelete}

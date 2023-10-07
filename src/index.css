@@ -17,6 +17,12 @@
   -o-border-radius: 6px;
 }
 
+.cart-scroll::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
+  position: absolute;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
