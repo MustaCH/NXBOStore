@@ -20,6 +20,10 @@ function ProductDetail() {
   const navigate = useNavigate();
   let params = useParams();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
+
   const nextSlide = () => {
     currentIndex === 2 ? setCurrentIndex(1) : setCurrentIndex(2);
   };
