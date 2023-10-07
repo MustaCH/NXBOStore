@@ -73,17 +73,22 @@ function Cart() {
             </div>
             <div className="flex flex-col justify-evenly gap-2 pt-6 lg:pt-12">
               <button
+                onClick={cart.length === 0 ? null : ""}
                 className={`${
                   cart.length === 0
-                    ? `bg-gray-500 text-zinc-800 font-semibold p-3 lg:mt-8 rounded-xl`
+                    ? `bg-gray-500 text-zinc-800 font-semibold p-3 lg:mt-8 rounded-xl cursor-not-allowed`
                     : `bg-orange-500 text-zinc-900 font-semibold p-3 rounded-xl`
                 }`}
               >
                 Buy
               </button>
               <button
-                onClick={handleClearCart}
-                className="bg-zinc-900  text-gray-300 font-semibold p-3 rounded-xl"
+                onClick={cart.length === 0 ? null : handleClearCart}
+                className={`${
+                  cart.length === 0
+                    ? `bg-zinc-900  text-gray-300 font-semibold p-3 rounded-xl cursor-not-allowed`
+                    : `bg-zinc-900  text-gray-300 font-semibold p-3 rounded-xl`
+                }`}
               >
                 Clear Cart
               </button>
