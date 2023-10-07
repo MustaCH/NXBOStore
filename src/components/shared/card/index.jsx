@@ -16,7 +16,7 @@ function Card({ product, btnText }) {
 
   return (
     <Link to={`/cat/:catid/${id}`} className="group flex flex-col items-center">
-      <div className="bg-zinc-900 w-50 lg:w-96 mt-16 p-8 pb-3 rounded-xl flex flex-col items-center text-center text-gray-300 uppercase font-semibold">
+      <div className="bg-zinc-900 w-72 lg:w-96 mt-16 p-8 pb-3 rounded-xl flex flex-col items-center text-center text-gray-300 uppercase font-semibold">
         <div>
           <img
             className="w-40 h-40 lg:w-60 lg:h-60 object-cover rounded-full -mt-16 border border-transparent group-hover:border-4 group-hover:border-orange-600 duration-150"
