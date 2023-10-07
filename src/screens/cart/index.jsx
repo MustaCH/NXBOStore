@@ -73,14 +73,14 @@ function Cart() {
             </div>
             <div className="flex flex-col justify-evenly gap-2 pt-6 lg:pt-12">
               <button
-                onClick={cart.length === 0 ? null : ""}
+                onClick={cart.length === 0 ? null : () => navigate("/checkout")}
                 className={`${
                   cart.length === 0
                     ? `bg-gray-500 text-zinc-800 font-semibold p-3 lg:mt-8 rounded-xl cursor-not-allowed`
                     : `bg-orange-500 text-zinc-900 font-semibold p-3 rounded-xl`
                 }`}
               >
-                Buy
+                Checkout
               </button>
               <button
                 onClick={cart.length === 0 ? null : handleClearCart}
