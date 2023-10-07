@@ -8,6 +8,10 @@ function Cart() {
   const { cart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
+  const totalDiscount = cart.reduce((total, product) => {
+    return total + product.discount;
+  }, 0);
+
   const totalPrice = cart.reduce((total, product) => {
     const productPrice = (product.price - product.discount) * product.quantity;
     return total + productPrice;
@@ -48,8 +52,20 @@ function Cart() {
                   : `flex justify-between text-gray-300/50 py-1`
               }`}
             >
-              <p>Discount applied</p>
-              <p>-$0</p>
+              <p
+                className={`${
+                  totalDiscount != 0 ? `text-red-500` : `text-gray-300/50`
+                }`}
+              >
+                Discount applied
+              </p>
+              <p
+                className={`${
+                  totalDiscount != 0 ? `text-red-500` : `text-gray-300/50`
+                }`}
+              >
+                -${totalDiscount}
+              </p>
             </div>
             <div className="flex justify-between text-gray-300 py-1">
               <p className="font-bold text-2xl">Total</p>
