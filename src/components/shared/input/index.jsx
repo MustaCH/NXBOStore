@@ -8,7 +8,9 @@ function Input({
   checked,
   placeholder,
   id,
+  value,
   customStyle,
+  onChange,
 }) {
   const [inputStyle, setInputStyle] = useState(
     "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2"
@@ -24,8 +26,10 @@ function Input({
         type={type}
         name={name}
         id={id}
+        value={value}
         placeholder={placeholder}
         checked={checked}
+        onChange={onChange}
       />
     </div>
   );

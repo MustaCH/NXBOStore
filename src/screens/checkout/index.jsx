@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "../../components/shared";
 import { FcSimCardChip } from "react-icons/fc";
 import { LuNfc } from "react-icons/lu";
@@ -11,6 +11,66 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 function Checkout() {
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [id, setId] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const emailRegex =
+    /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(“.+”))@(([[0–9]{1,3}.[0–9]{1,3}.[0–9]{1,3}.[0–9]{1,3}])|(([a-zA-Z-0–9]+.)+[a-zA-Z]{2,}))$/;
+
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [idError, setIdError] = useState("");
+  const [postalCodeError, setPostalCodeError] = useState("");
+  const [shippingAddressError, setShippingAddressError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const validateFirstName = () => {
+    if (firstName.trim() === "") {
+      setFirstNameError("First name is required");
+    } else {
+      setFirstNameError("");
+    }
+  };
+
+  const validateLastName = () => {
+    if (lastName.trim() === "") {
+      setLastNameError("Last name is required");
+    } else {
+      setLastNameError("");
+    }
+  };
+
+  const validateEmail = () => {
+    if (!emailRegex.test(email)) {
+      setEmailError("E-mail is invalid");
+    } else if (email === "") {
+      setEmailError("E-mail is required");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  // Manejar cambios en los campos de entrada y ejecutar validación
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+    validateFirstName();
+  };
+
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+    validateLastName();
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    validateEmail();
+  };
 
   const totalDiscount = cart.reduce((total, product) => {
     return total + product.discount;
@@ -34,18 +94,32 @@ function Checkout() {
           <div className="flex flex-col lg:flex-row lg:justify-between">
             <div className="flex flex-col gap-4 px-4 lg:px-0">
               <div className="flex flex-col lg:flex-row gap-4 ">
-                <Input
-                  label={"First name:"}
-                  labelFor={"firstname"}
-                  name={"firstname"}
-                  type={"text"}
-                />
-                <Input
-                  label={"Last name:"}
-                  labelFor={"lastname"}
-                  name={"lastname"}
-                  type={"text"}
-                />
+                <div className="flex flex-col">
+                  <Input
+                    label={"First name:"}
+                    labelFor={"firstname"}
+                    name={"firstname"}
+                    type={"text"}
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                  />
+                  {firstNameError && (
+                    <p className="text-red-500">{firstNameError}</p>
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <Input
+                    label={"Last name:"}
+                    labelFor={"lastname"}
+                    name={"lastname"}
+                    type={"text"}
+                    value={lastName}
+                    onChange={handleLastNameChange}
+                  />
+                  {lastNameError && (
+                    <p className="text-red-500">{lastNameError}</p>
+                  )}
+                </div>
               </div>
               <div className="flex gap-4">
                 <Input
@@ -77,12 +151,17 @@ function Checkout() {
                   name={"phone"}
                   type={"tel"}
                 />
-                <Input
-                  label={"E-mail:"}
-                  labelFor={"email"}
-                  name={"email"}
-                  type={"text"}
-                />
+                <div className="flex flex-col">
+                  <Input
+                    label={"E-mail:"}
+                    labelFor={"email"}
+                    name={"email"}
+                    type={"text"}
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                  {emailError && <p className="text-red-500">{emailError}</p>}
+                </div>
               </div>
             </div>
             <div className="flex flex-col gap-2 text-start lg:text-end lg:justify-between text-xl mt-4 px-4">
