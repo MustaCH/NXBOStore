@@ -3,6 +3,7 @@ import { Input, CartItem } from "../../components/shared";
 import { FcSimCardChip } from "react-icons/fc";
 import { LuNfc } from "react-icons/lu";
 import { BiLinkExternal } from "react-icons/bi";
+import { SiGooglepay, SiPaypal, SiApplepay } from "react-icons/si";
 import { CartContext } from "../../storage/cart-context";
 import { Link, useNavigate } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
@@ -27,9 +28,9 @@ function Checkout() {
       </Link>
       <div className="place-self-center">
         <div className="flex flex-col bg-zinc-900 text-gray-300 rounded-xl py-6 lg:px-4 w-96	lg:w-full">
-          <h1 className="text-3xl font-bold text-start mb-4 ps-4 lg:ps-0">
+          <legend className="text-3xl font-bold text-start mb-4 ps-4 lg:ps-0">
             Checkout
-          </h1>
+          </legend>
           <div className="flex flex-col lg:flex-row lg:justify-between">
             <div className="flex flex-col gap-4 px-4 lg:px-0">
               <div className="flex flex-col lg:flex-row gap-4 ">
@@ -63,10 +64,10 @@ function Checkout() {
                 />
               </div>
               <Input
-                label={"Shipping addres:"}
+                label={"Shipping address:"}
                 labelFor={"addres"}
-                name={"addres"}
-                type={"text"}
+                name={"address"}
+                type={"address"}
                 customStyle={"lg:w-96"}
               />
               <div className="flex flex-col lg:flex-row gap-4">
@@ -74,7 +75,7 @@ function Checkout() {
                   label={"Phone number:"}
                   labelFor={"phone"}
                   name={"phone"}
-                  type={"number"}
+                  type={"tel"}
                 />
                 <Input
                   label={"E-mail:"}
@@ -85,9 +86,7 @@ function Checkout() {
               </div>
             </div>
             <div className="flex flex-col gap-2 text-start lg:text-end lg:justify-between text-xl mt-4 px-4">
-              <h2 className="text-3xl text-white font-semibold">
-                Purchase summary:
-              </h2>
+              <h2 className="text-3xl text-white font-semibold">Summary:</h2>
               <p>Total products: {cart.length}</p>
               <Link
                 to={"/cart"}
@@ -104,15 +103,35 @@ function Checkout() {
           </div>
           <div className="flex flex-col lg:flex-row gap-4 mt-8">
             <div className="">
-              <h2 className="text-2xl font-bold mb-4 ps-4 lg:ps-0">Billing</h2>
+              <legend className="text-2xl font-bold mb-4 ps-4 lg:ps-0">
+                Billing
+              </legend>
               <div className="flex flex-col gap-4 px-4 lg:px-0">
+                <div className="flex gap-4">
+                  <button className="px-4 py-1  w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
+                    <SiPaypal className="text-xl drop-shadow-md" />
+                  </button>
+                  <button className="px-4 py-1 w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
+                    <SiGooglepay className="text-4xl drop-shadow-md" />
+                  </button>
+                  <button className="px-4 py-1 w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500 duration-300">
+                    <SiApplepay className="text-4xl drop-shadow-md" />
+                  </button>
+                </div>
+                <form className="flex items-center gap-4">
+                  <legend className="font-semibold text-lg">Or use:</legend>
+                  <p>Debit:</p>
+                  <Input name={"debit"} type={"radio"} />
+                  <p>Credit:</p>
+                  <Input name={"credit"} type={"radio"} />
+                </form>
                 <Input
-                  name={"addres"}
+                  name={"cardnumber"}
                   type={"number"}
                   placeholder={"CARD NUMBER"}
                 />
                 <Input
-                  name={"addres"}
+                  name={"cardname"}
                   type={"text"}
                   placeholder={"CARDHOLDER NAME"}
                 />

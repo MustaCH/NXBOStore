@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 
-function Input({ labelFor, label, type, name, placeholder, id, customStyle }) {
+function Input({
+  labelFor,
+  label,
+  type,
+  name,
+  checked,
+  placeholder,
+  id,
+  customStyle,
+}) {
   const [inputStyle, setInputStyle] = useState(
     "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2"
   );
@@ -16,6 +25,7 @@ function Input({ labelFor, label, type, name, placeholder, id, customStyle }) {
         name={name}
         id={id}
         placeholder={placeholder}
+        checked={checked}
       />
     </div>
   );
