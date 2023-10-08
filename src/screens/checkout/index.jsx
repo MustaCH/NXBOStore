@@ -157,7 +157,7 @@ function Checkout() {
                 />
               </div>
             </div>
-            <div className="flex justify-center py-4 mb-24 lg:mb-8 px-4">
+            <div className="flex flex-col items-center justify-center py-4 mb-24 lg:mb-4 px-4">
               <div className="w-80 h-52 lg:w-96 lg:h-56 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl p-6 drop-shadow-xl">
                 <p className="text-end text-xl font-bold">CARD</p>
                 <div className="p-4">
@@ -175,6 +175,14 @@ function Checkout() {
                     YOUR CARDS NAME
                   </p>
                 </div>
+              </div>
+              <div className="flex flex-col gap-4 lg:flex-row items-center lg:justify-between mt-8">
+                <button className="px-4 py-2 lg:py-1  w-80 lg:w-44 text-center text-white font-bold rounded-lg bg-gradient-to-r from-orange-500 to-red-500">
+                  Pay
+                </button>
+                <button className="px-4 py-1  w-80 lg:w-44 text-center  text-white font-bold bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
