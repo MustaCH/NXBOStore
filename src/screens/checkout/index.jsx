@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Input, CartItem } from "../../components/shared";
+import { Input } from "../../components/shared";
 import { FcSimCardChip } from "react-icons/fc";
 import { LuNfc } from "react-icons/lu";
 import { BiLinkExternal } from "react-icons/bi";
@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
 
 function Checkout() {
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const totalDiscount = cart.reduce((total, product) => {
@@ -136,7 +136,7 @@ function Checkout() {
                   placeholder={"CARDHOLDER NAME"}
                 />
               </div>
-              <div className="flex flex-row lg:gap-4 mt-4 lg:px-0 ">
+              <form className="flex flex-row lg:gap-4 mt-4 lg:px-0 ">
                 <Input
                   customStyle={"w-3/4 lg:w-full text-center self-center"}
                   name={"month"}
@@ -155,6 +155,15 @@ function Checkout() {
                   type={"number"}
                   placeholder={"CVV"}
                 />
+              </form>
+              <div className="w-96 mt-8">
+                <p className="text-xs text-gray-600">
+                  *By filling out this form you agree that your personal data
+                  provided to NXBO will be used exclusively for the purpose of
+                  collecting payment for the products and services provided by
+                  the company. And you understand that this data will not be
+                  used for any other purpose without my explicit consent.
+                </p>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center py-4 mb-24 lg:mb-4 px-4">

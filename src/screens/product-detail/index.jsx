@@ -75,7 +75,6 @@ function ProductDetail() {
     };
     cartContext.addToCart(selectedProduct);
     setPopupVisible(true);
-    console.log("Estado actual del carrito:", cartContext.cart);
   };
 
   useEffect(() => {
