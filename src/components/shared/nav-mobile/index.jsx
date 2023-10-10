@@ -20,9 +20,11 @@ function NavMobile() {
   return (
     <div className="relative z-50">
       <nav className="bg-zinc-900 lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 p-4 px-10 flex justify-between rounded-tr-xl rounded-tl-xl">
-        <NavLink to={"/"}>
+        <NavLink to={"/NXBOStore"}>
           <button
-            className={activePage === "/" ? `text-orange-600` : `text-gray-400`}
+            className={
+              activePage === "/NXBOStore" ? `text-orange-600` : `text-gray-400`
+            }
           >
             <RiHome6Line />
           </button>

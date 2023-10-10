@@ -22,7 +22,7 @@ const Sidebar = () => {
     <nav className="hidden bg-zinc-900 fixed left-0 top-0 w-28 h-full lg:flex flex-col justify-between py-6 rounded-tr-xl rounded-br-xl">
       <div>
         <ul className="pl-4">
-          <NavLink to={"/"}>
+          <NavLink to={"/NXBOStore"}>
             <div className="my-5">
               <svg
                 className="h-20 w-20 fill-orange-600"
@@ -35,13 +35,13 @@ const Sidebar = () => {
           </NavLink>
           <li
             className={` p-4 rounded-tl-xl rounded-bl-xl ${
-              activePage === "/" ? "bg-zinc-800" : "bg-zinc-900 "
+              activePage === "/NXBOStore" ? "bg-zinc-800" : "bg-zinc-900 "
             }`}
           >
             <NavLink
-              to="/"
+              to="/NXBOStore"
               className={` p-4 flex justify-center rounded-xl ${
-                activePage === "/"
+                activePage === "/NXBOStore"
                   ? "bg-orange-600 text-white"
                   : "bg-zinc-900 text-orange-600 hover:bg-orange-600 hover:text-white duration-300"
               }`}

@@ -20,7 +20,7 @@ function App() {
         <Sidebar />
         <NavMobile />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/NXBOStore" element={<Main />} />
           <Route path="/product-list" element={<ProductList />} />
           <Route path="/cat/:catid" element={<ProductCat />} />
           <Route path="/cat/:catid/:itemid" element={<ProductDetail />} />
