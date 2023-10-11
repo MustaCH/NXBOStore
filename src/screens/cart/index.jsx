@@ -54,14 +54,14 @@ function Cart() {
             >
               <p
                 className={`${
-                  totalDiscount != 0 ? `text-red-500` : `text-gray-300/50`
+                  totalDiscount !== 0 ? `text-red-500` : `text-gray-300/50`
                 }`}
               >
                 Discount applied
               </p>
               <p
                 className={`${
-                  totalDiscount != 0 ? `text-red-500` : `text-gray-300/50`
+                  totalDiscount !== 0 ? `text-red-500` : `text-gray-300/50`
                 }`}
               >
                 -${totalDiscount}

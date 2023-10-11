@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Input({
   labelFor,
@@ -11,10 +11,12 @@ function Input({
   value,
   customStyle,
   onChange,
+  onClick,
+  onBlur,
+  onSelect,
 }) {
-  const [inputStyle, setInputStyle] = useState(
-    "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2"
-  );
+  const inputStyle =
+    "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2";
 
   const style = `${inputStyle} ${customStyle || ""}`;
 
@@ -29,7 +31,10 @@ function Input({
         value={value}
         placeholder={placeholder}
         checked={checked}
+        onSelect={onSelect}
         onChange={onChange}
+        onClick={onClick}
+        onBlur={onBlur}
       />
     </div>
   );
