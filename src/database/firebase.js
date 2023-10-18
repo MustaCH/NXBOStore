@@ -56,12 +56,22 @@ export async function getLatestReleases() {
 
 export async function getLastAvailable() {
   const productsRef = collection(db, "products");
-  const q = query(productsRef, where("stock", "<", 10, "||", ">", 0));
-  const snapshot = await getDocs(q);
-  const products = snapshot.docs.map((item) => ({
+  const queryStockLessThan10 = query(productsRef, where("stock", "<", 10));
+  const queryStockGreaterThan0 = query(productsRef, where("stock", ">", 0));
+  const snapshotStockLessThan10 = await getDocs(queryStockLessThan10);
+  const snapshotStockGreaterThan0 = await getDocs(queryStockGreaterThan0);
+  const productsLessThan10 = snapshotStockLessThan10.docs.map((item) => ({
     ...item.data(),
     id: item.id,
   }));
+  const productsGreaterThan0 = snapshotStockGreaterThan0.docs.map((item) => ({
+    ...item.data(),
+    id: item.id,
+  }));
+  const products = productsLessThan10.filter((product) =>
+    productsGreaterThan0.some((p) => p.id === product.id)
+  );
+
   return products;
 }
 
