@@ -12,6 +12,13 @@ function ProductCat() {
   const { catid } = useParams();
   const [category, setCategory] = useState([]);
   const [filteredCategory, setFilteredCategory] = useState([]);
+  const availableProducts = filteredCategory.filter(
+    (product) => product.stock > 0
+  );
+  const unavailableProducts = filteredCategory.filter(
+    (product) => product.stock === 0
+  );
+  const allProducts = [...availableProducts, ...unavailableProducts];
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
@@ -24,13 +31,16 @@ function ProductCat() {
   }, [catid]);
 
   useEffect(() => {
-    if (filter === "latestReleases") {
-      const currentDate = new Date().getTime();
-      const latestReleases = category.filter((product) => {
-        const productDate = new Date(product.date).getTime();
-        return productDate >= currentDate;
-      });
-      setFilteredCategory(latestReleases);
+    if (filter === "lowest") {
+      const lowestToHighest = category
+        .slice()
+        .sort((a, b) => a.price - b.price);
+      setFilteredCategory(lowestToHighest);
+    } else if (filter === "highest") {
+      const highestToLowest = category
+        .slice()
+        .sort((a, b) => b.price - a.price);
+      setFilteredCategory(highestToLowest);
     } else if (filter === "lastAvailable") {
       const lastAvailable = category.filter((product) => product.stock <= 10);
       setFilteredCategory(lastAvailable);
@@ -66,13 +76,23 @@ function ProductCat() {
         <div className="flex gap-4 lg:gap-56 mx-5 items-center">
           <button
             className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
-              filter === "latestReleases"
+              filter === "lowest"
                 ? "bg-orange-600 border-2 border-orange-300"
                 : "bg-orange-800"
             }`}
-            onClick={() => handleFilterClick("latestReleases")}
+            onClick={() => handleFilterClick("lowest")}
           >
-            latest releases
+            Lowest price
+          </button>
+          <button
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+              filter === "highest"
+                ? "bg-orange-600 border-2 border-orange-300"
+                : "bg-orange-800"
+            }`}
+            onClick={() => handleFilterClick("highest")}
+          >
+            Highest price
           </button>
           <button
             className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 rounded-xl shadow-lg ${
@@ -111,7 +131,7 @@ function ProductCat() {
             <RiEmotionUnhappyLine className="text-6xl" />
           </div>
         ) : (
-          filteredCategory.map((product) => (
+          allProducts.map((product) => (
             <Card key={product.id} product={product} btnText={"See more"} />
           ))
         )}

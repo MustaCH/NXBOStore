@@ -54,6 +54,26 @@ export async function getLatestReleases() {
   return products;
 }
 
+export async function getCatLatest(catid) {
+  const productsRef = collection(db, "products");
+  const currentDate = new Date().getTime();
+
+  // Consulta para obtener los productos que son "últimos lanzamientos"
+  const q = query(
+    productsRef,
+    where("cat", "==", catid),
+    where("date", ">=", currentDate)
+  );
+  const snapshot = await getDocs(q);
+
+  const catLatest = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return catLatest;
+}
+
 export async function getLastAvailable() {
   const productsRef = collection(db, "products");
   const queryStockLessThan10 = query(productsRef, where("stock", "<", 10));
