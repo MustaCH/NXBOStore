@@ -31,7 +31,8 @@ function Checkout() {
   const [cvvCode, setCvvCode] = useState("XXX");
   const [isCvvFlipped, setIsCvvFlipped] = useState(false);
   const [installments, setInstallments] = useState(1);
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
+
   const navigate = useNavigate();
 
   const totalDiscount = cart.reduce((total, product) => {
@@ -228,7 +229,7 @@ function Checkout() {
         await updateDoc(productRef, { stock: newStock });
       }
     }
-
+    clearCart();
     console.log("Orden creada con exito");
   };
 
