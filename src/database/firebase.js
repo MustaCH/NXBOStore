@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import "firebase/firestore";
 import {
+  addDoc,
   collection,
   doc,
   getDoc,
@@ -8,6 +9,7 @@ import {
   getFirestore,
   orderBy,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { subYears } from "date-fns";
@@ -93,5 +95,17 @@ export async function getProduct(id) {
   const snapshot = await getDoc(docRef);
   return { ...snapshot.data(), id: snapshot.id };
 }
+
+// Agregar un nuevo pedido a la colección "Orders"
+export const addOrder = async (orderData) => {
+  const ordersRef = collection(db, "Orders");
+  return await addDoc(ordersRef, orderData);
+};
+
+// Actualizar el stock de un producto en la colección "products"
+export const updateProductStock = async (productId, newStock) => {
+  const productRef = doc(db, "products", productId);
+  return await updateDoc(productRef, { stock: newStock });
+};
 
 export default db;

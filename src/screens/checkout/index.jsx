@@ -12,6 +12,8 @@ import {
   FaCcAmex,
   FaCreditCard,
 } from "react-icons/fa6";
+import { addDoc, collection, updateDoc, doc, getDoc } from "firebase/firestore";
+import db from "../../database/firebase";
 
 function Checkout() {
   const [validName, setValidName] = useState(true);
@@ -88,7 +90,9 @@ function Checkout() {
     let emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     setValidEmail(value);
     if (!emailRegex.test(value)) {
-      setValidEmail(false);
+      setValidEmail(value);
+    } else {
+      //
     }
   };
 
@@ -192,6 +196,40 @@ function Checkout() {
   const handleInstallments = (e) => {
     let value = e.target.value;
     setInstallments(value);
+  };
+
+  const handlePay = async () => {
+    const orderData = {
+      firstName: validName,
+      lastName: validLastName,
+      ID: validId,
+      postal: validPostal,
+      address: validAddress,
+      email: validEmail,
+
+      products: cart.map((product) => ({
+        productId: product.id,
+        productName: product.title,
+        quantity: product.quantity,
+      })),
+    };
+
+    const ordersRef = collection(db, "Orders");
+    const newOrder = await addDoc(ordersRef, orderData);
+
+    for (const product of cart) {
+      const productId = product.id;
+      const productRef = doc(db, "products", productId);
+      const productSnapshot = await getDoc(productRef);
+      if (productSnapshot.exists()) {
+        const productData = productSnapshot.data();
+        const newStock = productData.stock - product.quantity;
+
+        await updateDoc(productRef, { stock: newStock });
+      }
+    }
+
+    console.log("Orden creada con exito");
   };
 
   return (
@@ -512,7 +550,10 @@ function Checkout() {
                 </div>
               )}
               <div className="flex flex-col gap-4 lg:flex-row items-center lg:justify-between mt-8">
-                <button className="px-4 py-2 lg:py-1  w-80 lg:w-44 text-center text-white font-bold rounded-lg bg-gradient-to-r from-orange-500 to-red-500">
+                <button
+                  onClick={handlePay}
+                  className="px-4 py-2 lg:py-1  w-80 lg:w-44 text-center text-white font-bold rounded-lg bg-gradient-to-r from-orange-500 to-red-500"
+                >
                   Pay
                 </button>
                 <Link
