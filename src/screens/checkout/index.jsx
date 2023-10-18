@@ -4,7 +4,6 @@ import { CartContext } from "../../storage/cart-context";
 import { Link, useNavigate } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { FcSimCardChip } from "react-icons/fc";
-import { SiGooglepay, SiPaypal, SiApplepay } from "react-icons/si";
 import { LuNfc } from "react-icons/lu";
 import { BiLinkExternal } from "react-icons/bi";
 import {
@@ -15,7 +14,6 @@ import {
 } from "react-icons/fa6";
 
 function Checkout() {
-  const [paymentMethod, setPaymentMethod] = useState("");
   const [cardType, setCardType] = useState("debit");
   const [cardBrand, setCardBrand] = useState("CARD");
   const [cardNumber, setCardNumber] = useState("XXXX XXXX XXXX XXXX");
@@ -37,9 +35,7 @@ function Checkout() {
     return total + productPrice;
   }, 0);
 
-  const handlePaymentMethod = (value) => {
-    setPaymentMethod(value);
-  };
+  const installmentAmount = (totalPrice / installments).toFixed(2);
 
   const handleCardType = (e) => {
     let value = e.target.value;
@@ -162,6 +158,7 @@ function Checkout() {
                     labelFor={"firstname"}
                     name={"firstname"}
                     type={"text"}
+                    optional={false}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -170,6 +167,7 @@ function Checkout() {
                     labelFor={"lastname"}
                     name={"lastname"}
                     type={"text"}
+                    optional={false}
                   />
                 </div>
               </div>
@@ -180,6 +178,7 @@ function Checkout() {
                   name={"id"}
                   type={"number"}
                   customStyle={"w-full"}
+                  optional={false}
                 />
                 <Input
                   label={"Postal code:"}
@@ -187,6 +186,7 @@ function Checkout() {
                   name={"postal"}
                   type={"number"}
                   customStyle={"w-full"}
+                  optional={false}
                 />
               </div>
               <Input
@@ -195,6 +195,7 @@ function Checkout() {
                 name={"address"}
                 type={"address"}
                 customStyle={"lg:w-96"}
+                optional={false}
               />
               <div className="flex flex-col lg:flex-row gap-4">
                 <Input
@@ -209,6 +210,7 @@ function Checkout() {
                     labelFor={"email"}
                     name={"email"}
                     type={"text"}
+                    optional={false}
                   />
                 </div>
               </div>
@@ -232,7 +234,7 @@ function Checkout() {
                   cardType === "credit" ? `font-semibold text-sm` : `hidden`
                 }`}
               >
-                Payments: {installments} x ${totalPrice / installments}
+                Payments: {installments} x {installmentAmount}
               </h4>
             </div>
           </div>
@@ -242,31 +244,11 @@ function Checkout() {
                 Billing
               </legend>
               <div className="flex flex-col gap-4 px-4 lg:px-0">
-                <div className="flex gap-4">
-                  <button className="px-4 py-1  w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
-                    <SiPaypal
-                      className="text-xl drop-shadow-md"
-                      onClick={() => handlePaymentMethod("paypal")}
-                    />
-                  </button>
-                  <button className="px-4 py-1 w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
-                    <SiGooglepay
-                      className="text-4xl drop-shadow-md"
-                      onClick={() => handlePaymentMethod("googlepay")}
-                    />
-                  </button>
-                  <button className="px-4 py-1 w-40 flex justify-center items-center bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500 duration-300">
-                    <SiApplepay
-                      className="text-4xl drop-shadow-md"
-                      onClick={() => handlePaymentMethod("applepay")}
-                    />
-                  </button>
-                </div>
                 <form className="flex items-center gap-4">
-                  <legend className="font-semibold text-lg">Or use:</legend>
+                  <legend className="font-semibold text-lg">Card type:</legend>
                   <p>Debit:</p>
                   <Input
-                    name={"paymentMethod"}
+                    name={"cardType"}
                     type={"radio"}
                     value={"debit"}
                     checked={cardType === "debit"}
@@ -274,14 +256,13 @@ function Checkout() {
                   />
                   <p>Credit:</p>
                   <Input
-                    name={"paymentMethod"}
+                    name={"cardType"}
                     type={"radio"}
                     value={"credit"}
                     checked={cardType === "credit"}
                     onChange={handleCardType}
                   />
                 </form>
-
                 <div>
                   <form className="flex flex-col gap-4">
                     <Input

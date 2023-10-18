@@ -14,6 +14,7 @@ function Input({
   onClick,
   onBlur,
   onSelect,
+  optional,
 }) {
   const inputStyle =
     "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2";
@@ -22,7 +23,14 @@ function Input({
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={labelFor}>{label}</label>
+      <label htmlFor={labelFor}>
+        {label}
+        <span
+          className={`${optional === false ? `text-red-500 ps-1` : `hidden`}`}
+        >
+          *
+        </span>
+      </label>
       <input
         className={customStyle ? style : inputStyle}
         type={type}

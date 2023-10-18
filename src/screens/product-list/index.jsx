@@ -7,7 +7,7 @@ function ProductList() {
     <div className="lg:pl-28">
       <Header />
 
-      <div className="mb-24 lg:my-24 flex flex-col gap-4 lg:grid lg:grid-cols-2 items-center uppercase text-gray-300 font-semibold text-4xl lg:text-8xl ">
+      <div className="mb-24 lg:my-24 flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:gap-0 items-center uppercase text-gray-300 font-semibold text-4xl lg:text-8xl ">
         <Link
           to={"/cat/shirts"}
           className="my-4 lg:my-0 relative flex justify-center transition-all drop-shadow-xl hover:text-orange-600 group"
@@ -18,7 +18,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/QKthhjn/shirt-cat.jpg"
             alt="categorie-header"
-            className="brightness-50"
+            className="brightness-50 w-full"
           />
         </Link>
         <Link
@@ -31,7 +31,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/wz5HMJs/hoodie-cat.jpg"
             alt="categorie-header"
-            className="brightness-50 "
+            className="brightness-50  w-full"
           />
         </Link>
         <Link
@@ -44,7 +44,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/ZxYTy46/coat-cat.jpg"
             alt="categorie-header"
-            className="brightness-50"
+            className="brightness-50 w-full"
           />
         </Link>
         <Link
@@ -57,7 +57,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/qRyXsnz/pant-cat.jpg"
             alt="categorie-header"
-            className="brightness-50"
+            className="brightness-50 w-full"
           />
         </Link>
         <Link
@@ -70,7 +70,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/gSMkWkB/short-cat.jpg"
             alt="categorie-header"
-            className="brightness-50"
+            className="brightness-50 w-full"
           />
         </Link>
         <Link
@@ -83,7 +83,7 @@ function ProductList() {
           <img
             src="https://i.ibb.co/j8vpxQh/accesorie-cat.jpg"
             alt="categorie-header"
-            className="brightness-50"
+            className="brightness-50 w-full"
           />
         </Link>
       </div>
