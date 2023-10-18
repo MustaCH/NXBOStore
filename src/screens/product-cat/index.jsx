@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCategory } from "../../database/firebase";
-import {
-  RiArrowLeftSLine,
-  RiCloseFill,
-  RiEmotionUnhappyLine,
-} from "react-icons/ri";
+import { RiArrowLeftSLine, RiEmotionUnhappyLine } from "react-icons/ri";
 import { Card, Header } from "../../components/shared";
 
 function ProductCat() {
@@ -71,13 +67,13 @@ function ProductCat() {
       <h2 className="font-bold text-white text-5xl lg:text-6xl uppercase text-center border-b-2 border-b-orange-600 py-6 lg:pb-6">
         {catid}
       </h2>
-      <div className="flex flex-col md:flex-row justify-evenly my-12 text-white items-center">
-        <p className="font-bold text-lg pb-5 lg:pb-0">Filter by:</p>
-        <div className="flex gap-4 lg:gap-56 mx-5 items-center">
+      <div className="flex flex-col md:flex-row justify-center my-12 text-white items-center">
+        <p className="font-bold text-lg pb-5 md:pb-0">Filter by:</p>
+        <div className="flex w-full divide-x divide-zinc-800 md:divide-x-0 md:w-fit md:gap-4 mx-5 items-center">
           <button
-            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600    md:rounded-xl shadow-lg ${
               filter === "lowest"
-                ? "bg-orange-600 border-2 border-orange-300"
+                ? "bg-orange-600 font-semibold "
                 : "bg-orange-800"
             }`}
             onClick={() => handleFilterClick("lowest")}
@@ -85,9 +81,9 @@ function ProductCat() {
             Lowest price
           </button>
           <button
-            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600    md:rounded-xl shadow-lg ${
               filter === "highest"
-                ? "bg-orange-600 border-2 border-orange-300"
+                ? "bg-orange-600  font-semibold"
                 : "bg-orange-800"
             }`}
             onClick={() => handleFilterClick("highest")}
@@ -95,9 +91,9 @@ function ProductCat() {
             Highest price
           </button>
           <button
-            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 md:rounded-xl shadow-lg ${
               filter === "lastAvailable"
-                ? "bg-orange-600 border-2 border-orange-300 font-semibold"
+                ? "bg-orange-600  font-semibold"
                 : "bg-orange-800"
             }`}
             onClick={() => handleFilterClick("lastAvailable")}
@@ -105,9 +101,9 @@ function ProductCat() {
             last available
           </button>
           <button
-            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600 active:bg-orange-600 active:border-2 active:border-orange-300  rounded-xl shadow-lg ${
+            className={`uppercase text-sm  p-1 lg:p-2  lg:hover:bg-orange-600   md:rounded-xl shadow-lg ${
               filter === "discount"
-                ? "bg-orange-600 border-2 border-orange-300"
+                ? "bg-orange-600 font-semibold"
                 : "bg-orange-800"
             }`}
             onClick={() => handleFilterClick("discount")}
@@ -117,11 +113,13 @@ function ProductCat() {
         </div>
         <button
           className={`${
-            filter === "" ? "hidden" : "text-rose-600 text-3xl pt-5 lg:pt-0"
+            filter === ""
+              ? "hidden"
+              : "text-rose-600 text-sm uppercase pt-5 lg:pt-0"
           }`}
           onClick={clearFilter}
         >
-          <RiCloseFill />
+          Clear filter
         </button>
       </div>
       <div className="flex flex-col items-center md:flex-row md:flex-wrap justify-center mb-28 lg:mb-0 gap-4">
