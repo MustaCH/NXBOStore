@@ -64,17 +64,21 @@ function ProductDetail() {
   }, [sizePopUp]);
 
   const handleAddToCart = () => {
-    const selectedProduct = {
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      pic1: product.pic1,
-      discount: product.discount,
-      size: selectedOption,
-      quantity: selectedQuantity,
-    };
-    cartContext.addToCart(selectedProduct);
-    setPopupVisible(true);
+    if (product.stock !== 0) {
+      const selectedProduct = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        pic1: product.pic1,
+        discount: product.discount,
+        size: selectedOption,
+        quantity: selectedQuantity,
+      };
+      cartContext.addToCart(selectedProduct);
+      setPopupVisible(true);
+    } else {
+      //
+    }
   };
 
   useEffect(() => {
@@ -219,15 +223,27 @@ function ProductDetail() {
             </div>
             <div className="flex flex-col">
               <Link
-                to={`${isSizeValid ? `/cart` : `/cat/:catid/${product.id}`}`}
+                to={`${
+                  isSizeValid && product.stock !== 0
+                    ? `/cart`
+                    : `/cat/:catid/${product.id}`
+                }`}
                 onClick={isSizeValid ? handleAddToCart : chooseSize}
-                className="text-center bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
+                className={`${
+                  product.stock !== 0
+                    ? `text-center bg-orange-600 p-2 lg:hover:bg-orange-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl`
+                    : `text-center bg-zinc-500 p-2 mt-2 rounded-xl uppercase text-gray-600 font-semibold shadow-xl cursor-not-allowed`
+                }`}
               >
                 Buy
               </Link>
               <button
                 onClick={isSizeValid ? handleAddToCart : chooseSize}
-                className="bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl"
+                className={`${
+                  product.stock !== 0
+                    ? `bg-zinc-500 p-2 lg:hover:bg-zinc-800 duration-150 mt-2 rounded-xl uppercase text-gray-200 font-semibold shadow-xl`
+                    : `bg-zinc-500 p-2  mt-2 rounded-xl uppercase text-gray-600 font-semibold shadow-xl cursor-not-allowed`
+                }`}
               >
                 Add to cart
               </button>
