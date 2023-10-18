@@ -16,21 +16,27 @@ import { addDoc, collection, updateDoc, doc, getDoc } from "firebase/firestore";
 import db from "../../database/firebase";
 
 function Checkout() {
-  const [validName, setValidName] = useState(true);
-  const [validLastName, setValidLastName] = useState(true);
-  const [validId, setValidId] = useState(true);
-  const [validPostal, setValidPostal] = useState(true);
-  const [validAddress, setValidAddress] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
+  const [validName, setValidName] = useState(false);
+  const [validLastName, setValidLastName] = useState(false);
+  const [validId, setValidId] = useState(false);
+  const [validPostal, setValidPostal] = useState(false);
+  const [validAddress, setValidAddress] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
   const [cardType, setCardType] = useState("debit");
   const [cardBrand, setCardBrand] = useState("CARD");
   const [cardNumber, setCardNumber] = useState("XXXX XXXX XXXX XXXX");
+  const [isCardValid, setIsCardValid] = useState(true);
   const [cardHolder, setCardHolder] = useState("YOUR CARDS NAME");
+  const [validHolder, setValidHolder] = useState();
   const [expMonth, setExpMonth] = useState("XX");
+  const [validMonth, setValidMonth] = useState();
   const [expYear, setExpYear] = useState("XX");
+  const [validYear, setValidYear] = useState();
   const [cvvCode, setCvvCode] = useState("XXX");
+  const [validCvv, setValidCvv] = useState();
   const [isCvvFlipped, setIsCvvFlipped] = useState(false);
   const [installments, setInstallments] = useState(1);
+  const [isPayAttempted, setIsPayAttempted] = useState(false);
   const { cart, clearCart } = useContext(CartContext);
 
   const navigate = useNavigate();
@@ -50,7 +56,7 @@ function Checkout() {
     let value = e.target.value;
     setValidName(value);
     if (validName === "") {
-      setValidName(false);
+      setValidName(!!value);
     }
   };
 
@@ -58,7 +64,7 @@ function Checkout() {
     let value = e.target.value;
     setValidLastName(value);
     if (validLastName === "") {
-      setValidLastName(false);
+      setValidLastName(!!value);
     }
   };
 
@@ -66,7 +72,7 @@ function Checkout() {
     let value = e.target.value;
     setValidId(value);
     if (validId === "") {
-      setValidId(false);
+      setValidId(!!value);
     }
   };
 
@@ -74,7 +80,7 @@ function Checkout() {
     let value = e.target.value;
     setValidPostal(value);
     if (validPostal === "") {
-      setValidPostal(false);
+      setValidPostal(!!value);
     }
   };
 
@@ -82,7 +88,7 @@ function Checkout() {
     let value = e.target.value;
     setValidAddress(value);
     if (validAddress === "") {
-      setValidAddress(false);
+      setValidAddress(!!value);
     }
   };
 
@@ -91,7 +97,7 @@ function Checkout() {
     let emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     setValidEmail(value);
     if (!emailRegex.test(value)) {
-      setValidEmail(value);
+      setValidEmail(!!value);
     } else {
       //
     }
@@ -119,9 +125,16 @@ function Checkout() {
 
     setCardNumber(formattedValue);
 
-    if (value === "") {
-      setCardNumber("XXXX XXXX XXXX XXXX");
+    if (
+      /^(4|5)\d{15}$/.test(value) ||
+      /^(3\d{3}(\s\d{6}|\d{8}))$/.test(value)
+    ) {
+      setIsCardValid(true);
+    } else if (value === "") {
       setCardBrand("CARD");
+      setIsCardValid(false);
+    } else {
+      setIsCardValid(false);
     }
   };
 
@@ -139,6 +152,10 @@ function Checkout() {
   };
 
   const formatCardNumber = (value, cardType) => {
+    if (!value) {
+      return "XXXX XXXX XXXX XXXX";
+    }
+
     let formattedValue = value;
     switch (cardType) {
       case "visa":
@@ -149,7 +166,7 @@ function Checkout() {
         formattedValue = value.replace(/(\d{4})(\d{6})(?=\d)/, "$1 $2 ");
         break;
       default:
-        break;
+        return "CARD NOT SUPPORTED";
     }
     return formattedValue;
   };
@@ -159,6 +176,9 @@ function Checkout() {
     setCardHolder(value);
     if (value === "") {
       setCardHolder("YOUR CARDS NAME");
+      setValidHolder(false);
+    } else {
+      setValidHolder(true);
     }
   };
 
@@ -166,8 +186,10 @@ function Checkout() {
     let value = e.target.value;
     if (/^[1-9]$|^[0-1][0-2]$/.test(value)) {
       setExpMonth(value);
+      setValidMonth(true);
     } else {
       setExpMonth("XX");
+      setValidMonth(false);
     }
   };
 
@@ -176,8 +198,10 @@ function Checkout() {
     const currentYear = new Date().getFullYear() % 100;
     if (/^\d{2}$/.test(value) && parseInt(value, 10) >= currentYear) {
       setExpYear(value);
+      setValidYear(true);
     } else {
       setExpYear("XX");
+      setValidYear(false);
     }
   };
 
@@ -190,7 +214,9 @@ function Checkout() {
     }
     setCvvCode(value);
     if (value === "") {
-      setCvvCode("XXX");
+      setValidCvv(false);
+    } else {
+      setValidCvv(true);
     }
   };
 
@@ -200,6 +226,23 @@ function Checkout() {
   };
 
   const handlePay = async () => {
+    setIsPayAttempted(true);
+    if (
+      !validName ||
+      !validLastName ||
+      !validId ||
+      !validPostal ||
+      !validAddress ||
+      !validEmail ||
+      !isCardValid ||
+      !validHolder ||
+      !validMonth ||
+      !validYear ||
+      !validCvv
+    ) {
+      alert("Por favor, completa todos los campos correctamente.");
+      return; // Sale de la función si hay campos incompletos o inválidos
+    }
     const orderData = {
       firstName: validName,
       lastName: validLastName,
@@ -230,6 +273,7 @@ function Checkout() {
       }
     }
     clearCart();
+
     console.log("Orden creada con exito" + newOrder);
   };
 
@@ -257,7 +301,9 @@ function Checkout() {
                   />
                   <p
                     className={`${
-                      !validName ? `text-red-500 uppercase text-xs` : `hidden`
+                      isPayAttempted && !validName
+                        ? `text-red-500 uppercase text-xs`
+                        : `hidden`
                     }`}
                   >
                     Please enter a name
@@ -274,7 +320,7 @@ function Checkout() {
                   />
                   <p
                     className={`${
-                      !validLastName
+                      isPayAttempted && !validLastName
                         ? `text-red-500 uppercase text-xs`
                         : `hidden`
                     }`}
@@ -296,7 +342,9 @@ function Checkout() {
                   />
                   <p
                     className={`${
-                      !validId ? `text-red-500 uppercase text-xs` : `hidden`
+                      isPayAttempted && !validId
+                        ? `text-red-500 uppercase text-xs`
+                        : `hidden`
                     }`}
                   >
                     Please enter your ID
@@ -314,7 +362,9 @@ function Checkout() {
                   />
                   <p
                     className={`${
-                      !validPostal ? `text-red-500 uppercase text-xs` : `hidden`
+                      isPayAttempted && !validPostal
+                        ? `text-red-500 uppercase text-xs`
+                        : `hidden`
                     }`}
                   >
                     Please enter your postal code
@@ -332,7 +382,9 @@ function Checkout() {
               />
               <p
                 className={`${
-                  !validAddress ? `text-red-500 uppercase text-xs` : `hidden`
+                  isPayAttempted && !validAddress
+                    ? `text-red-500 uppercase text-xs`
+                    : `hidden`
                 }`}
               >
                 Please enter your address
@@ -355,7 +407,9 @@ function Checkout() {
                   />
                   <p
                     className={`${
-                      !validEmail ? `text-red-500 uppercase text-xs` : `hidden`
+                      isPayAttempted && !validEmail
+                        ? `text-red-500 uppercase text-xs`
+                        : `hidden`
                     }`}
                   >
                     Please enter a valid email
@@ -414,49 +468,84 @@ function Checkout() {
                 </form>
                 <div>
                   <form className="flex flex-col gap-4">
-                    <Input
-                      name={"cardnumber"}
-                      type={"text"}
-                      placeholder={"CARD NUMBER"}
-                      onChange={handleCardNumber}
-                      maxLength="16"
-                    />
-
-                    <Input
-                      name={"cardname"}
-                      type={"text"}
-                      placeholder={"CARDHOLDER NAME"}
-                      onChange={handleCardHolder}
-                    />
+                    <div>
+                      <Input
+                        name={"cardnumber"}
+                        type={"text"}
+                        placeholder={"CARD NUMBER"}
+                        onChange={handleCardNumber}
+                        maxLength="16"
+                        inputMode="numeric"
+                      />
+                      {isPayAttempted && !isCardValid && (
+                        <p className="text-red-500 uppercase text-xs">
+                          Invalid card number
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Input
+                        name={"cardname"}
+                        type={"text"}
+                        placeholder={"CARDHOLDER NAME"}
+                        onChange={handleCardHolder}
+                      />
+                      {isPayAttempted && !validHolder && (
+                        <p className="text-red-500 uppercase text-xs">
+                          Please enter the cardholder's name
+                        </p>
+                      )}
+                    </div>
                   </form>
                 </div>
                 <form className="flex flex-row lg:gap-4 lg:px-0 ">
-                  <Input
-                    customStyle={"w-3/4 lg:w-full text-center self-center"}
-                    name={"month"}
-                    type={"text"}
-                    placeholder={"MM"}
-                    onChange={handleExpMonth}
-                    maxLength="2"
-                  />
-                  <Input
-                    customStyle={"w-3/4 lg:w-full text-center self-center"}
-                    name={"year"}
-                    type={"text"}
-                    placeholder={"YY"}
-                    onChange={handleExpYear}
-                    maxLength="2"
-                  />
-                  <Input
-                    customStyle={"w-3/4 lg:w-full text-center self-center"}
-                    name={"cvv"}
-                    type={"text"}
-                    placeholder={"CVV"}
-                    onChange={handleCvvCode}
-                    maxLength="3"
-                    onSelect={() => setIsCvvFlipped(true)}
-                    onBlur={() => setIsCvvFlipped(false)}
-                  />
+                  <div>
+                    <Input
+                      customStyle={"w-3/4 lg:w-full text-center self-center"}
+                      name={"month"}
+                      type={"text"}
+                      placeholder={"MM"}
+                      onChange={handleExpMonth}
+                      maxLength="2"
+                    />
+                    {isPayAttempted && validMonth === false && (
+                      <p className="text-red-500 uppercase text-xs">
+                        Please enter a valid month
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <Input
+                      customStyle={"w-3/4 lg:w-full text-center self-center"}
+                      name={"year"}
+                      type={"text"}
+                      placeholder={"YY"}
+                      onChange={handleExpYear}
+                      maxLength="2"
+                    />
+                    {isPayAttempted && validYear === false && (
+                      <p className="text-red-500 uppercase text-xs">
+                        Please enter a valid year
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <Input
+                      customStyle={"w-3/4 lg:w-full text-center self-center"}
+                      name={"cvv"}
+                      type={"text"}
+                      placeholder={"CVV"}
+                      onChange={handleCvvCode}
+                      maxLength="3"
+                      onSelect={() => setIsCvvFlipped(true)}
+                      onBlur={() => setIsCvvFlipped(false)}
+                    />
+                    {isPayAttempted && validCvv === false && (
+                      <p className="text-red-500 uppercase text-xs">
+                        Please enter a valid CVV code
+                      </p>
+                    )}
+                  </div>
                 </form>
                 {cardType === "credit" ? (
                   <form className="flex items-center justify-between mt-4">
