@@ -14,6 +14,12 @@ import {
 } from "react-icons/fa6";
 
 function Checkout() {
+  const [validName, setValidName] = useState(true);
+  const [validLastName, setValidLastName] = useState(true);
+  const [validId, setValidId] = useState(true);
+  const [validPostal, setValidPostal] = useState(true);
+  const [validAddress, setValidAddress] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
   const [cardType, setCardType] = useState("debit");
   const [cardBrand, setCardBrand] = useState("CARD");
   const [cardNumber, setCardNumber] = useState("XXXX XXXX XXXX XXXX");
@@ -36,6 +42,55 @@ function Checkout() {
   }, 0);
 
   const installmentAmount = (totalPrice / installments).toFixed(2);
+
+  const handleValidName = (e) => {
+    let value = e.target.value;
+    setValidName(value);
+    if (validName === "") {
+      setValidName(false);
+    }
+  };
+
+  const handleValidLastName = (e) => {
+    let value = e.target.value;
+    setValidLastName(value);
+    if (validLastName === "") {
+      setValidLastName(false);
+    }
+  };
+
+  const handleValidId = (e) => {
+    let value = e.target.value;
+    setValidId(value);
+    if (validId === "") {
+      setValidId(false);
+    }
+  };
+
+  const handleValidPostal = (e) => {
+    let value = e.target.value;
+    setValidPostal(value);
+    if (validPostal === "") {
+      setValidPostal(false);
+    }
+  };
+
+  const handleValidAddress = (e) => {
+    let value = e.target.value;
+    setValidAddress(value);
+    if (validAddress === "") {
+      setValidAddress(false);
+    }
+  };
+
+  const handleValidEmail = (e) => {
+    let value = e.target.value;
+    let emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    setValidEmail(value);
+    if (!emailRegex.test(value)) {
+      setValidEmail(false);
+    }
+  };
 
   const handleCardType = (e) => {
     let value = e.target.value;
@@ -159,7 +214,15 @@ function Checkout() {
                     name={"firstname"}
                     type={"text"}
                     optional={false}
+                    onChange={handleValidName}
                   />
+                  <p
+                    className={`${
+                      !validName ? `text-red-500 uppercase text-xs` : `hidden`
+                    }`}
+                  >
+                    Please enter a name
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <Input
@@ -168,26 +231,56 @@ function Checkout() {
                     name={"lastname"}
                     type={"text"}
                     optional={false}
+                    onChange={handleValidLastName}
                   />
+                  <p
+                    className={`${
+                      !validLastName
+                        ? `text-red-500 uppercase text-xs`
+                        : `hidden`
+                    }`}
+                  >
+                    Please enter a lastname
+                  </p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <Input
-                  label={"ID:"}
-                  labelFor={"id"}
-                  name={"id"}
-                  type={"number"}
-                  customStyle={"w-full"}
-                  optional={false}
-                />
-                <Input
-                  label={"Postal code:"}
-                  labelFor={"postal"}
-                  name={"postal"}
-                  type={"number"}
-                  customStyle={"w-full"}
-                  optional={false}
-                />
+                <div>
+                  <Input
+                    label={"ID:"}
+                    labelFor={"id"}
+                    name={"id"}
+                    type={"text"}
+                    customStyle={"w-full"}
+                    optional={false}
+                    onChange={handleValidId}
+                  />
+                  <p
+                    className={`${
+                      !validId ? `text-red-500 uppercase text-xs` : `hidden`
+                    }`}
+                  >
+                    Please enter your ID
+                  </p>
+                </div>
+                <div>
+                  <Input
+                    label={"Postal code:"}
+                    labelFor={"postal"}
+                    name={"postal"}
+                    type={"text"}
+                    customStyle={"w-full"}
+                    optional={false}
+                    onChange={handleValidPostal}
+                  />
+                  <p
+                    className={`${
+                      !validPostal ? `text-red-500 uppercase text-xs` : `hidden`
+                    }`}
+                  >
+                    Please enter your postal code
+                  </p>
+                </div>
               </div>
               <Input
                 label={"Shipping address:"}
@@ -196,7 +289,15 @@ function Checkout() {
                 type={"address"}
                 customStyle={"lg:w-96"}
                 optional={false}
+                onChange={handleValidAddress}
               />
+              <p
+                className={`${
+                  !validAddress ? `text-red-500 uppercase text-xs` : `hidden`
+                }`}
+              >
+                Please enter your address
+              </p>
               <div className="flex flex-col lg:flex-row gap-4">
                 <Input
                   label={"Phone number:"}
@@ -211,7 +312,15 @@ function Checkout() {
                     name={"email"}
                     type={"text"}
                     optional={false}
+                    onBlur={handleValidEmail}
                   />
+                  <p
+                    className={`${
+                      !validEmail ? `text-red-500 uppercase text-xs` : `hidden`
+                    }`}
+                  >
+                    Please enter a valid email
+                  </p>
                 </div>
               </div>
             </div>
@@ -261,16 +370,19 @@ function Checkout() {
                     value={"credit"}
                     checked={cardType === "credit"}
                     onChange={handleCardType}
+                    maxLength={"16"}
                   />
                 </form>
                 <div>
                   <form className="flex flex-col gap-4">
                     <Input
                       name={"cardnumber"}
-                      type={"number"}
+                      type={"text"}
                       placeholder={"CARD NUMBER"}
                       onChange={handleCardNumber}
+                      maxLength="16"
                     />
+
                     <Input
                       name={"cardname"}
                       type={"text"}
@@ -283,23 +395,26 @@ function Checkout() {
                   <Input
                     customStyle={"w-3/4 lg:w-full text-center self-center"}
                     name={"month"}
-                    type={"number"}
+                    type={"text"}
                     placeholder={"MM"}
                     onChange={handleExpMonth}
+                    maxLength="2"
                   />
                   <Input
                     customStyle={"w-3/4 lg:w-full text-center self-center"}
                     name={"year"}
-                    type={"number"}
+                    type={"text"}
                     placeholder={"YY"}
                     onChange={handleExpYear}
+                    maxLength="2"
                   />
                   <Input
                     customStyle={"w-3/4 lg:w-full text-center self-center"}
                     name={"cvv"}
-                    type={"number"}
+                    type={"text"}
                     placeholder={"CVV"}
                     onChange={handleCvvCode}
+                    maxLength="3"
                     onSelect={() => setIsCvvFlipped(true)}
                     onBlur={() => setIsCvvFlipped(false)}
                   />
@@ -400,9 +515,12 @@ function Checkout() {
                 <button className="px-4 py-2 lg:py-1  w-80 lg:w-44 text-center text-white font-bold rounded-lg bg-gradient-to-r from-orange-500 to-red-500">
                   Pay
                 </button>
-                <button className="px-4 py-1  w-80 lg:w-44 text-center  text-white font-bold bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300">
+                <Link
+                  to={"/cart"}
+                  className="px-4 py-1  w-80 lg:w-44 text-center  text-white font-bold bg-zinc-800 rounded-lg hover:bg-orange-500 focus:bg-orange-500  duration-300"
+                >
                   Cancel
-                </button>
+                </Link>
               </div>
             </div>
           </div>

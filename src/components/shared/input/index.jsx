@@ -15,6 +15,7 @@ function Input({
   onBlur,
   onSelect,
   optional,
+  maxLength,
 }) {
   const inputStyle =
     "rounded-lg border-0 focus:border-2 border-orange-500 text-black p-2";
@@ -43,6 +44,7 @@ function Input({
         onChange={onChange}
         onClick={onClick}
         onBlur={onBlur}
+        maxLength={maxLength}
       />
     </div>
   );
