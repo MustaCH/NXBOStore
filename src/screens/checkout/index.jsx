@@ -230,7 +230,7 @@ function Checkout() {
       }
     }
     clearCart();
-    console.log("Orden creada con exito");
+    console.log("Orden creada con exito" + newOrder);
   };
 
   return (

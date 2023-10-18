@@ -7,3 +7,4 @@ export { default as Dropdown } from "./dropdown/index";
 export { default as SearchBar } from "./searchBar/index";
 export { default as Input } from "./input/index";
 export { default as CartItem } from "./cart-item/index";
+export { default as sizeChart } from "./size-chart/index";
