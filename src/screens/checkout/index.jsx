@@ -37,7 +37,7 @@ function Checkout() {
   const [isCvvFlipped, setIsCvvFlipped] = useState(false);
   const [installments, setInstallments] = useState(1);
   const [isPayAttempted, setIsPayAttempted] = useState(false);
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -272,7 +272,7 @@ function Checkout() {
         await updateDoc(productRef, { stock: newStock });
       }
     }
-    clearCart();
+
     navigate("/confirmation");
     console.log("Orden creada con exito" + newOrder);
   };
