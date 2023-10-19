@@ -4,6 +4,7 @@ import {
   Cart,
   Chat,
   Checkout,
+  Confirmation,
   FAQS,
   Main,
   ProductCat,
@@ -27,6 +28,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/FAQS" element={<FAQS />} />
         </Routes>
       </BrowserRouter>

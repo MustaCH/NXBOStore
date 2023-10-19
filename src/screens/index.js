@@ -6,3 +6,4 @@ export { default as Checkout } from "./checkout";
 export { default as ProductDetail } from "./product-detail";
 export { default as ProductCat } from "./product-cat/index";
 export { default as FAQS } from "./faqs";
+export { default as Confirmation } from "./confirmation";

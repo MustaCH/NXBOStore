@@ -273,7 +273,7 @@ function Checkout() {
       }
     }
     clearCart();
-
+    navigate("/confirmation");
     console.log("Orden creada con exito" + newOrder);
   };
 
