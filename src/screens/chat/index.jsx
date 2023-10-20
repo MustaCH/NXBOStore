@@ -91,7 +91,7 @@ function Chat() {
       <div className="flex justify-center mt-4 lg:mt-12">
         <div className="w-[90%]  bg-zinc-900 p-4 rounded-lg">
           <div
-            className="items-center max-h-[550px] lg:h-[600px] m-0 lg:m-12 lg:mb-4 p-4 border-2 border-orange-500 rounded-lg overflow-y-auto overflow-hidden"
+            className="items-center h-[550px] lg:h-[600px] m-0 lg:m-12 lg:mb-4 p-4 border-2 border-orange-500 rounded-lg overflow-y-auto overflow-hidden"
             ref={messagesRef}
           >
             <div className="flex flex-col gap-2 w-full ">
