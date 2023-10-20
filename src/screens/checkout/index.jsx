@@ -240,8 +240,8 @@ function Checkout() {
       !validYear ||
       !validCvv
     ) {
-      alert("Por favor, completa todos los campos correctamente.");
-      return; // Sale de la función si hay campos incompletos o inválidos
+      alert("Please complete all fields correctly.");
+      return;
     }
     const orderData = {
       firstName: validName,
