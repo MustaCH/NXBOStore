@@ -56,6 +56,13 @@ function Chat() {
             };
             setMessages((prevMessages) => [...prevMessages, botMessageObj]);
           }, 1000);
+          setTimeout(() => {
+            const botMessageObj = {
+              text: "No one seems to be available at the moment 😥. Please try again later ",
+              user: "Bot",
+            };
+            setMessages((prevMessages) => [...prevMessages, botMessageObj]);
+          }, 3000);
 
           break;
         default:
@@ -73,7 +80,7 @@ function Chat() {
 
   const handleOptionClick = (option) => {
     setNewMessage(option);
-    sendMessage(option); // Envía el mensaje automáticamente
+    sendMessage(option);
   };
 
   return (
