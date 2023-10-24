@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/NXBOStore/static/css/main.eac6e48f.css",
-    "main.js": "/NXBOStore/static/js/main.0dbfcf65.js",
+    "main.css": "/NXBOStore/static/css/main.2753de0b.css",
+    "main.js": "/NXBOStore/static/js/main.1425a5d2.js",
     "static/js/787.6f6bc781.chunk.js": "/NXBOStore/static/js/787.6f6bc781.chunk.js",
     "index.html": "/NXBOStore/index.html",
-    "main.eac6e48f.css.map": "/NXBOStore/static/css/main.eac6e48f.css.map",
-    "main.0dbfcf65.js.map": "/NXBOStore/static/js/main.0dbfcf65.js.map",
+    "main.2753de0b.css.map": "/NXBOStore/static/css/main.2753de0b.css.map",
+    "main.1425a5d2.js.map": "/NXBOStore/static/js/main.1425a5d2.js.map",
     "787.6f6bc781.chunk.js.map": "/NXBOStore/static/js/787.6f6bc781.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eac6e48f.css",
-    "static/js/main.0dbfcf65.js"
+    "static/css/main.2753de0b.css",
+    "static/js/main.1425a5d2.js"
   ]
 }
